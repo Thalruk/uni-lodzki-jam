@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float speed;
-    public static bool isItemsFull = false;
+  
     float horizontal;
     float vertical;
     [SerializeField] Vector2 movementDirection;
@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashTime;
     [SerializeField] float dashCooldown;
     private float _baseDashCooldown, _baseSpeed;
+    public static bool isItemsFull = false;
+    int equippedItemIndex;
     public void AddItemToInventory(ItemBaseClass item)
     {
         if (items.Count < 3)
@@ -49,6 +51,10 @@ public class PlayerMovement : MonoBehaviour
         HandelKeyInventoryDown();
 
     }
+    void UseEquippedItem()
+    {
+        items[equippedItemIndex].Interact();
+    }
     void FoxMaskUsed()
     {
         SetDashCooldown(dashCooldown / 2, speed * 1.2f);
@@ -57,15 +63,32 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && items.Count>0)
         {
-            items[0].Interact();
+            EquipItem(0);
+            equippedItemIndex = 0;
+
 
         }else if (Input.GetKeyDown(KeyCode.Alpha2) && items.Count > 1)
         {
-            items[1].Interact();
+            EquipItem(1);
+            equippedItemIndex = 1;
+
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && items.Count > 2) 
         {
-            items[2].Interact();
+            EquipItem(2);
+            equippedItemIndex = 2;
+
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            UseEquippedItem();
+        }
+    }
+    void EquipItem(int index)
+    {
+        for(int i = 0; i < items.Count; i++)
+        {
+            items[i].gameObject.SetActive(i == index);
         }
     }
     public void ResetMovementToBasic()
