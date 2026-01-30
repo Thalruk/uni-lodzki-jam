@@ -1,24 +1,40 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float speed;
-
+    public static bool isItemsFull = false;
     float horizontal;
     float vertical;
     [SerializeField] Vector2 movementDirection;
     Rigidbody2D rb;
-
+    List<ItemBaseClass> items = new List<ItemBaseClass>();
     [SerializeField] bool canDash = true;
     [SerializeField] bool isDashing = false;
     [SerializeField] float dashPower;
     [SerializeField] float dashTime;
     [SerializeField] float dashCooldown;
-
+    private float _baseDashCooldown, _baseSpeed;
+    public void AddItemToInventory(ItemBaseClass item)
+    {
+        if (items.Count < 3)
+        {
+            items.Add(item);
+        }
+        else
+        {
+            isItemsFull = true;
+        }
+    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        _baseDashCooldown = dashCooldown;
+        _baseSpeed = speed;
+        FoxMask.OnFoxMaskUsed += FoxMaskUsed;
+        ItemBaseClass.OnItemCollected += AddItemToInventory;
     }
     private void Update()
     {
@@ -30,8 +46,39 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
+        HandelKeyInventoryDown();
 
     }
+    void FoxMaskUsed()
+    {
+        SetDashCooldown(dashCooldown / 2, speed * 1.2f);
+    }
+    void HandelKeyInventoryDown()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && items.Count>0)
+        {
+            items[0].Interact();
+
+        }else if (Input.GetKeyDown(KeyCode.Alpha2) && items.Count > 1)
+        {
+            items[1].Interact();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && items.Count > 2) 
+        {
+            items[2].Interact();
+        }
+    }
+    public void ResetMovementToBasic()
+    {
+        dashCooldown = _baseDashCooldown;
+        speed = _baseSpeed;
+    }
+    public void SetDashCooldown(float dashCooldownValue, float speedValue)
+    {
+        dashCooldown = dashCooldownValue;
+        speed = speedValue;
+    }
+
     private void FixedUpdate()
     {
         if (isDashing)
@@ -52,5 +99,15 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+    }
+    private void OnDisable()
+    {
+        FoxMask.OnFoxMaskUsed -= FoxMaskUsed;
+        ItemBaseClass.OnItemCollected -= AddItemToInventory;
+    }
+    private void OnDestroy()
+    {
+        FoxMask.OnFoxMaskUsed -= FoxMaskUsed;
+        ItemBaseClass.OnItemCollected -= AddItemToInventory;
     }
 }
