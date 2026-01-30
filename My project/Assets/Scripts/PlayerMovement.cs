@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
     float horizontal;
     float vertical;
+    [SerializeField] Vector2 movementDirection;
     Rigidbody2D rb;
 
     [SerializeField] bool canDash = true;
@@ -21,9 +22,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
-        if (Input.GetMouseButtonDown(1) && canDash)
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
+        movementDirection = new Vector2(horizontal, vertical);
+
+        if (Input.GetMouseButtonDown(1) && canDash && movementDirection.sqrMagnitude > 0.1f)
         {
             StartCoroutine(Dash());
         }
@@ -36,15 +39,13 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-
-        Vector2 movementVector = new Vector2(horizontal, vertical);
-        rb.velocity = movementVector * speed;
+        rb.velocity = movementDirection * speed;
     }
     private IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;
-        rb.velocity = new Vector2(horizontal, vertical).normalized * dashPower;
+        rb.velocity = movementDirection.normalized * dashPower;
         //tr.emitting = true;
         yield return new WaitForSeconds(dashTime);
         //tr.emitting = false;
