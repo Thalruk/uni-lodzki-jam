@@ -11,5 +11,9 @@ public class FoxMask : ItemBaseClass
     {
         OnFoxMaskUsed?.Invoke();
     }
+    protected override void Collect()
+    {
+        base.Collect();
+    }
 
 }
