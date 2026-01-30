@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
-        movementDirection = new Vector2(horizontal, vertical);
+        movementDirection = new Vector2(horizontal, vertical).normalized;
 
         if (Input.GetMouseButtonDown(1) && canDash && movementDirection.sqrMagnitude > 0.1f)
         {
