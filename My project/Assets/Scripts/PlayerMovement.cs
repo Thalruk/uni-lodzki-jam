@@ -23,6 +23,10 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
+        if (Input.GetMouseButtonDown(1) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
 
     }
     private void FixedUpdate()
@@ -32,10 +36,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonDown(0) && canDash)
-        {
-            StartCoroutine(Dash());
-        }
+
         Vector2 movementVector = new Vector2(horizontal, vertical);
         rb.velocity = movementVector * speed;
     }
@@ -43,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     {
         canDash = false;
         isDashing = true;
-        rb.velocity = new Vector2(horizontal, vertical) * dashPower;
+        rb.velocity = new Vector2(horizontal, vertical).normalized * dashPower;
         //tr.emitting = true;
         yield return new WaitForSeconds(dashTime);
         //tr.emitting = false;
