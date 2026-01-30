@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -6,28 +7,48 @@ public class PlayerMovement : MonoBehaviour
 
     float horizontal;
     float vertical;
-    Rigidbody2D rb2D;
+    Rigidbody2D rb;
+
+    [SerializeField] bool canDash = true;
+    [SerializeField] bool isDashing = false;
+    [SerializeField] float dashPower;
+    [SerializeField] float dashTime;
+    [SerializeField] float dashCooldown;
+
     private void Awake()
     {
-        rb2D = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
     private void Update()
     {
-        HandleInput();
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
+
     }
     private void FixedUpdate()
     {
-        HandleMovement();
-    }
-    void HandleInput()
-    {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
-    }
+        if (isDashing)
+        {
+            return;
+        }
 
-    void HandleMovement()
-    {
+        if (Input.GetMouseButtonDown(0) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
         Vector2 movementVector = new Vector2(horizontal, vertical);
-        rb2D.velocity = movementVector * speed;
+        rb.velocity = movementVector * speed;
+    }
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        rb.velocity = new Vector2(horizontal, vertical) * dashPower;
+        //tr.emitting = true;
+        yield return new WaitForSeconds(dashTime);
+        //tr.emitting = false;
+        isDashing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 }
