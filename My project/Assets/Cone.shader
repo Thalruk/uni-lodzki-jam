@@ -14,6 +14,52 @@ Shader "Unlit/Cone"
 
         Pass
         {
+            ZWrite Off
+            ZTest Always
+            Cull Off
+
+            ColorMask R
+
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "UnityCG.cginc"
+
+            float _ViewRange;
+
+            struct appdata {
+                float4 vertex : POSITION;
+            };
+
+            struct v2f {
+                float4 pos : SV_POSITION;
+                float2 objPos : TEXCOORD0;
+            };
+
+            v2f vert (appdata v)
+            {
+                v2f o;
+                o.objPos = v.vertex.xy;
+                o.pos = UnityObjectToClipPos(v.vertex);
+                return o;
+            }
+
+            fixed4 frag (v2f i) : SV_Target
+            {
+                float len = length(i.objPos);
+                float maxLen = _ViewRange;
+
+                float3 col = float3(0, 0, 0);
+                float transparency = len < maxLen;
+                return 1 * transparency;
+            }
+            ENDCG
+        }
+
+        Pass
+        {
+            Blend Zero One
+
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
