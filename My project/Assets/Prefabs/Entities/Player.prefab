@@ -239,7 +239,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 8
+  m_Radius: 11.313708
 --- !u!1 &1388352557708862308
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,6 +488,8 @@ MonoBehaviour:
   dashPower: 5
   dashTime: 1
   dashCooldown: 6
+  uiImagesOfMasks: []
+  uiImagesOfMasksBG: []
 --- !u!50 &4541751155968350562
 Rigidbody2D:
   serializedVersion: 4

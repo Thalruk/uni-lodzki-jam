@@ -95,12 +95,14 @@ GameObject:
   - component: {fileID: 7102589050816921159}
   - component: {fileID: 3438086396111377562}
   - component: {fileID: 7640751267277425180}
+  - component: {fileID: 2263823673836535682}
+  - component: {fileID: 7262871641856931292}
   - component: {fileID: 7381229856773392574}
   - component: {fileID: 2585727013309122638}
   - component: {fileID: 5743676687915953012}
   m_Layer: 0
   m_Name: SmallEye
-  m_TagString: Untagged
+  m_TagString: MiniEye
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,9 +135,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d655d3470b4085d4ea4ee8f18fafaa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fow: {fileID: 0}
   lookDir: {x: 0, y: 0}
   offset: 0.3
-  eye: {fileID: 5629525467239883437}
+  eyeVisual: {fileID: 5629525467239883437}
+  openEye: {fileID: 21300000, guid: 634f8ebb74dc44443bc91527b80526a6, type: 3}
+  closedEye: {fileID: 21300000, guid: 3ffd32fb33b559748b12e69273681847, type: 3}
+  patrolAngle: 30
+  patrolSpeed: 2
+  rotationSpeed: 360
+  projectiles:
+  - {fileID: 3138275684053206616, guid: da5e5d77922ed7043812e0a3bf7e637f, type: 3}
+  - {fileID: 1331987396010035451, guid: 691afb20f2792bc42a86a938343cb9f0, type: 3}
+  - {fileID: 2256332530393482209, guid: 9015649034c0a9c41af07034e1188770, type: 3}
+  fireRate: 1
+  shootOffset: 5
+  isDead: 1
+  forceLookTarget: {fileID: 0}
 --- !u!114 &7640751267277425180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +171,61 @@ MonoBehaviour:
   waveFrequency: 1.5
   floatSpeed: 0.5
   floatMagnitude: 1
+--- !u!114 &2263823673836535682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9073372558426952292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb839c6a75fa3e341858d15d2f97ba3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 25
+  angle: 50
+  player: {fileID: 0}
+  playerInView: 0
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  circleCollider: {fileID: 7262871641856931292}
+--- !u!58 &7262871641856931292
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9073372558426952292}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 125
 --- !u!212 &7381229856773392574
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -248,7 +319,7 @@ SpriteMask:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5a25745f79f142a40a97b1d6975f3088, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3ffd32fb33b559748b12e69273681847, type: 3}
   m_MaskAlphaCutoff: 0
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0

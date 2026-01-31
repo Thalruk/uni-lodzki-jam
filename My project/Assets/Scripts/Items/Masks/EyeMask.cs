@@ -22,6 +22,7 @@ public class EyeMask : ItemBaseClass
     }
     void FindClosestTrackableObject()
     {
+        if (objectsForTracking.Count == 0) return;
         float tempDistance = Mathf.Infinity;
         float currentDistance = 0;
         for (int i = 0; i < objectsForTracking.Count; i++)
@@ -33,10 +34,9 @@ public class EyeMask : ItemBaseClass
                 target = objectsForTracking[i].transform;
             }
         }
-        print(target.name);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (target)
         {
