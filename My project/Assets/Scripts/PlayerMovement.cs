@@ -56,12 +56,15 @@ public class PlayerMovement : MonoBehaviour
         vertical = Input.GetAxisRaw("Vertical");
         movementDirection = new Vector2(horizontal, vertical).normalized;
 
-        if (Input.GetMouseButtonDown(1) && canDash && movementDirection.sqrMagnitude > 0.1f)
+        if (Input.GetMouseButtonDown(1) && canDash && movementDirection.sqrMagnitude > 0.1f && Time.timeScale != 0)
         {
             StartCoroutine(Dash());
         }
         HandelKeyInventoryDown();
-
+        if (Time.timeScale == 0)
+        {
+            transform.position += (Vector3)movementDirection * speed * Time.unscaledDeltaTime;
+        }
     }
     void UseEquippedItem()
     {
@@ -83,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         if (items.Any(x => x.isPassive && x.isEquipped)) return;
-        if (Input.GetKeyDown(KeyCode.Alpha1) && items.Count>0 && items[0].TryEquip())
+        if (Input.GetKeyDown(KeyCode.Alpha1) && items.Count > 0 && items[0].TryEquip())
         {
             EquipItem(0);
             equippedItemIndex = 0;
@@ -93,7 +96,8 @@ public class PlayerMovement : MonoBehaviour
             }
 
 
-        }else if (Input.GetKeyDown(KeyCode.Alpha2) && items.Count > 1 && items[1].TryEquip())
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && items.Count > 1 && items[1].TryEquip())
         {
             EquipItem(1);
             equippedItemIndex = 1;
@@ -103,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && items.Count > 2 && items[2].TryEquip()) 
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && items.Count > 2 && items[2].TryEquip())
         {
             EquipItem(2);
             equippedItemIndex = 2;
@@ -117,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void EquipItem(int index)
     {
-        for(int i = 0; i < items.Count; i++)
+        for (int i = 0; i < items.Count; i++)
         {
             items[i].OnItemChange(i == index);
         }
@@ -164,14 +168,24 @@ public class PlayerMovement : MonoBehaviour
         vendigoStateHands.SetActive(false);
     }
     #endregion
+
     private void FixedUpdate()
     {
         if (isDashing)
         {
             return;
         }
+        if (Time.timeScale != 0)
+        {
+            rb.velocity = movementDirection * speed;
+        }
+    }
 
-        rb.velocity = movementDirection * speed;
+    private void LateUpdate()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
+        transform.up = dir;
     }
     private IEnumerator Dash()
     {
