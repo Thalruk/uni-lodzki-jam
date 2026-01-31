@@ -5,9 +5,9 @@ public class Mask : MonoBehaviour
 {
     RenderTexture maskRT;
     CommandBuffer cb;
-    [SerializeField] Material maskMaterial;
+    [SerializeField] Material[] maskMaterial;
 
-    [SerializeField] GameObject coneGameObj;
+    [SerializeField] GameObject[] coneGameObj;
     Renderer cone;
     void Start()
     {
@@ -28,8 +28,15 @@ public class Mask : MonoBehaviour
         cb.SetRenderTarget(maskRT);
         cb.ClearRenderTarget(false, true, Color.black);
 
-        cone = coneGameObj.GetComponent<Renderer>();
-        cb.DrawRenderer(cone, maskMaterial, 0, 0);
+        int i = 0;
+        foreach (GameObject go in coneGameObj)
+        {
+            Renderer r = go.GetComponent<Renderer>();
+            cb.DrawRenderer(r, maskMaterial[i], 0, 0);
+            i++;
+        }
+        //cone = coneGameObj.GetComponent<Renderer>();
+        //cb.DrawRenderer(cone, maskMaterial, 0, 0);
 
         Camera.main.AddCommandBuffer(
             CameraEvent.AfterForwardOpaque,
