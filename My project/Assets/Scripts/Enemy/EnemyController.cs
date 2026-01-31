@@ -88,7 +88,7 @@ public class EnemyController : MonoBehaviour, IDamaglable
             {
                 rb2D.velocity = Vector2.zero;
                 return;
-            }
+            } 
         }
         else
         {
