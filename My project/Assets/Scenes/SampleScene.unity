@@ -354,8 +354,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolPoints: []
   patrolPointHolder: {fileID: 1196237901}
-  speed: 5
-  rotateSpeed: 120
+  baseSpeed: 5
+  enragedSpeedModifier: 1.5
+  baseRotateSpeed: 120
+  enragedRotationSpeedModifier: 0.75
   timer: 0
   fow: {fileID: 1790133460}
 --- !u!58 &344762675

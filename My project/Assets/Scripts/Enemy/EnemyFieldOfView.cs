@@ -9,9 +9,9 @@ public class EnemyFieldOfView : MonoBehaviour
     public PlayerMovement player;
 
     public bool playerInView = false;
-    public LayerMask obstacleMask;
+    [SerializeField] LayerMask obstacleMask;
 
-    public CircleCollider2D circleCollider;
+    [SerializeField] CircleCollider2D circleCollider;
 
     public event Action<bool> OnPlayerSeenChanged;
     private bool lastDetectedState = false;
