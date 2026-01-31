@@ -150,7 +150,7 @@ MonoBehaviour:
   - {fileID: 2256332530393482209, guid: 9015649034c0a9c41af07034e1188770, type: 3}
   fireRate: 1
   shootOffset: 5
-  isDead: 0
+  isDead: 1
   forceLookTarget: {fileID: 0}
 --- !u!114 &7640751267277425180
 MonoBehaviour:
