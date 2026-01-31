@@ -13,7 +13,12 @@ public class EyeMask : ItemBaseClass
         isHasDurationTime = true;
         useDuration = 6f;
         cooldown = useDuration + cooldown;
+        objectsForTracking = GameObject.FindGameObjectsWithTag("Track").ToList();
  
+    }
+    protected override void Use()
+    {
+        FindClosestTrackableObject();
     }
     void FindClosestTrackableObject()
     {
@@ -28,5 +33,6 @@ public class EyeMask : ItemBaseClass
                 target = objectsForTracking[i].transform;
             }
         }
+        print(target.name);
     }
 }

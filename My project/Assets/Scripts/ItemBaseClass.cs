@@ -48,7 +48,7 @@ public class ItemBaseClass : MonoBehaviour, Interactable
             timer = Time.time + cooldown;
             if (isHasDurationTime)
             {
-                Invoke(nameof(Unequip), useDuration);
+                Invoker.InvokeDelayed(Unequip, useDuration);
             }
         }
     }
