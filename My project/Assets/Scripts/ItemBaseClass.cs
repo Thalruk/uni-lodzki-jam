@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ItemBaseClass : MonoBehaviour, Interactable
 {
@@ -30,20 +27,20 @@ public class ItemBaseClass : MonoBehaviour, Interactable
         OnItemCollected?.Invoke(this);
         gameObject.transform.parent = player;
         gameObject.transform.position = trashPoint.position;
-        if(gameObject.TryGetComponent<Collider2D>(out Collider2D collider))
+        if (gameObject.TryGetComponent<Collider2D>(out Collider2D collider))
         {
             collider.enabled = false;
         }
-        
+
     }
     void OnCollected()
     {
-        if(PlayerMovement.isItemsFull) return;     
+        if (PlayerMovement.isItemsFull) return;
         Collect();
     }
     public void Interact()
     {
-        if(isEquipped && isCollected && Time.time > timer)
+        if (isEquipped && isCollected && Time.time > timer)
         {
             Use();
             timer = Time.time + cooldown;
@@ -53,17 +50,18 @@ public class ItemBaseClass : MonoBehaviour, Interactable
             }
         }
     }
-    protected virtual void Unequip() 
+    protected virtual void Unequip()
     {
         gameObject.transform.position = trashPoint.position;
         isEquipped = false;
     }
     public bool TryEquip()
     {
-        if(Time.time > timer)
+        if (Time.time > timer)
         {
             return true;
-        }else
+        }
+        else
         {
             return false;
         }
