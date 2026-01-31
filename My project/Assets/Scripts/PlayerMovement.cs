@@ -124,7 +124,35 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            GetRidOfItem(equippedItemIndex);
+        }
 
+    }
+    void UIUpdate()
+    {
+        for (int i = 0; i < uiImagesOfMasks.Count; i++)
+        {
+            uiImagesOfMasks[i].sprite = null;
+            uiImagesOfMasks[i].color = new Color(0, 0, 0, 0);
+            uiImagesOfMasksBG[i].color = colorBase;
+        }
+        for (int i = 0; i < items.Count; i++)
+        {
+            uiImagesOfMasks[i].sprite = items[i].maskImage;
+            uiImagesOfMasks[i].color = Color.white;
+        }
+    }
+    
+    void GetRidOfItem(int index)
+    {
+        var item = items[index];
+        item.transform.parent = null;
+        item.gameObject.transform.position = (Vector2)(transform.position+transform.up)*2f;
+        item.GetComponent<Collider2D>().enabled = true;
+        items.RemoveAt(index);
+        UIUpdate();
     }
     void EquipItem(int index)
     {
@@ -194,12 +222,6 @@ public class PlayerMovement : MonoBehaviour
         transform.up = dir;
     }
 
-    private void LateUpdate()
-    {
-        //Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Vector2 dir = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
-        //transform.up = dir;
-    }
     private IEnumerator Dash()
     {
         canDash = false;
