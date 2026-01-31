@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+[RequireComponent(typeof (HealthSystem))]
+public class EnemyController : MonoBehaviour, IDamaglable
 {
     [SerializeField] List<PatrolPoint> patrolPoints;
     [SerializeField] Transform patrolPointHolder;
@@ -22,7 +23,7 @@ public class EnemyController : MonoBehaviour
     private bool isChasing = false;
     private bool isWaiting = false;
     public bool caughtByPlayer = false;
-
+    HealthSystem healthSystem;
     private void OnEnable() => fow.OnPlayerSeenChanged += HandleDetection;
     private void OnDisable() => fow.OnPlayerSeenChanged -= HandleDetection;
     private void Awake()
@@ -36,6 +37,8 @@ public class EnemyController : MonoBehaviour
         {
             Debug.LogError($"{name} doesnt have enough patrol points!");
         }
+        healthSystem = GetComponent<HealthSystem>();
+        healthSystem.SetStartingHealth(1);
     }
 
     private void HandleDetection(bool spotted)
@@ -102,5 +105,10 @@ public class EnemyController : MonoBehaviour
 
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, targetAngle), baseRotateSpeed * Time.fixedDeltaTime);
+    }
+
+    public void TakeDamage()
+    {
+        healthSystem.ChangeHealth(1);
     }
 }
