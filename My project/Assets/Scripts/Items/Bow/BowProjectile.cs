@@ -19,12 +19,9 @@ public class BowProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("MiniEye"))
+        if(collision.TryGetComponent(out IDamaglable damaglable))
         {
-            if (collision.TryGetComponent(out BeholderMiniEye eye))
-            {
-                eye.Die();
-            }
+            damaglable.TakeDamage();
         }
     }
 }
