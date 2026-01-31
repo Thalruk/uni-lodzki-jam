@@ -72,6 +72,7 @@ public class ItemBaseClass : MonoBehaviour, Interactable
         if (isThisItem)
         {
             gameObject.transform.localPosition = player.localPosition;
+            gameObject.transform.rotation = player.rotation;
             isEquipped = true;
         }
         else

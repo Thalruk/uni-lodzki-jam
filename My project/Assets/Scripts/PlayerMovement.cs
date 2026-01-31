@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         vertical = Input.GetAxisRaw("Vertical");
         movementDirection = new Vector2(horizontal, vertical).normalized;
 
-        if (Input.GetMouseButtonDown(1) && canDash && movementDirection.sqrMagnitude > 0.1f)
+        if (Input.GetMouseButtonDown(1) && canDash && movementDirection.sqrMagnitude > 0.1f && Time.timeScale != 0)
         {
             StartCoroutine(Dash());
         }
