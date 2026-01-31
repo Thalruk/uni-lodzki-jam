@@ -172,5 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 5
-  isPassive: 0
+  maskImage: {fileID: 21300000, guid: b8953824509de8a46b54e1d07089128c, type: 3}
+  isPassive: 1
   isEquipped: 0
