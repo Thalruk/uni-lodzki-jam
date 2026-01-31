@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ItemBaseClass : MonoBehaviour, Interactable
 {
-    [SerializeField] protected Transform player, trashPoint;
+    protected Transform player, trashPoint;
     [SerializeField] protected float cooldown;
     protected bool isCollected = false, isHasDurationTime;
     public static event Action<ItemBaseClass> OnItemCollected;
@@ -28,7 +28,7 @@ public class ItemBaseClass : MonoBehaviour, Interactable
         isCollected = true;
         OnItemCollected?.Invoke(this);
         gameObject.transform.parent = player;
-        gameObject.transform.localPosition = trashPoint.position;
+        gameObject.transform.position = trashPoint.position;
         if(gameObject.TryGetComponent<Collider2D>(out Collider2D collider))
         {
             collider.enabled = false;
@@ -54,7 +54,7 @@ public class ItemBaseClass : MonoBehaviour, Interactable
     }
     protected virtual void Unequip() 
     {
-        gameObject.transform.localPosition = trashPoint.position;
+        gameObject.transform.position = trashPoint.position;
         isEquipped = false;
     }
     public bool TryEquip()
@@ -76,7 +76,7 @@ public class ItemBaseClass : MonoBehaviour, Interactable
         }
         else
         {
-            gameObject.transform.localPosition = trashPoint.position;
+            gameObject.transform.position = trashPoint.position;
             isEquipped = false;
         }
     }

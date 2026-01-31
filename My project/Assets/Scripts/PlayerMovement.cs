@@ -2,25 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float speed;
-  
-    float horizontal;
-    float vertical;
-    Rigidbody2D rb;
-    List<ItemBaseClass> items = new List<ItemBaseClass>();
     [SerializeField] Vector2 movementDirection;
     [SerializeField] SpriteRenderer playerSpriteRenderer;
     [SerializeField] Sprite vendigoSprite, playerSprite;
+    [SerializeField] GameObject vendigoLeftHand, vendigoRigthHand, vendigoStateHands;
     [SerializeField] bool canDash = true;
     [SerializeField] bool isDashing = false;
     [SerializeField] float dashPower;
     [SerializeField] float dashTime;
     [SerializeField] float dashCooldown;
+
+    List<ItemBaseClass> items = new List<ItemBaseClass>();
     private float _baseDashCooldown, _baseSpeed;
     public static bool isItemsFull = false;
     int equippedItemIndex;
+    bool VendigoState = false, vendigoLeftHandUsed;
+    float horizontal;
+    float vertical;
+    Rigidbody2D rb;
     public void AddItemToInventory(ItemBaseClass item)
     {
         if (items.Count < 3)
@@ -37,9 +40,11 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         _baseDashCooldown = dashCooldown;
         _baseSpeed = speed;
+        playerSpriteRenderer.sprite = playerSprite;
         FoxMask.OnFoxMaskUsed += FoxMaskUsed;
         ItemBaseClass.OnItemCollected += AddItemToInventory;
         FoxMask.OnFoxMaskEndEffect += ResetMovementToBasic;
+        VendigoMask.OnVendigoMaskUsed += VendigoMaksUsed;
     }
     private void Update()
     {
@@ -92,9 +97,16 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-        if (!items[equippedItemIndex].isPassive && Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            UseEquippedItem();
+            if (VendigoState)
+            {
+                VendigoAttack();
+            }
+            else if (!items[equippedItemIndex].isPassive)
+            {
+                UseEquippedItem();
+            }
         }
     }
     void EquipItem(int index)
@@ -124,6 +136,20 @@ public class PlayerMovement : MonoBehaviour
     void VendigoMaksUsed()
     {
         playerSpriteRenderer.sprite = vendigoSprite;
+        VendigoState = true;
+        vendigoStateHands.SetActive(true);
+    }
+    void VendigoAttack()
+    {
+        vendigoLeftHandUsed = !vendigoLeftHandUsed;
+        if (vendigoLeftHandUsed)
+        {
+            vendigoLeftHand.GetComponent<Animation>().Play();
+        }
+        else
+        {
+            vendigoRigthHand.GetComponent<Animation>().Play();
+        }
     }
     #endregion
     private void FixedUpdate()
@@ -152,11 +178,13 @@ public class PlayerMovement : MonoBehaviour
         FoxMask.OnFoxMaskUsed -= FoxMaskUsed;
         ItemBaseClass.OnItemCollected -= AddItemToInventory;
         FoxMask.OnFoxMaskEndEffect -= ResetMovementToBasic;
+        VendigoMask.OnVendigoMaskUsed -= VendigoMaksUsed;
     }
     private void OnDestroy()
     {
         FoxMask.OnFoxMaskUsed -= FoxMaskUsed;
         ItemBaseClass.OnItemCollected -= AddItemToInventory;
         FoxMask.OnFoxMaskEndEffect -= ResetMovementToBasic;
+        VendigoMask.OnVendigoMaskUsed -= VendigoMaksUsed;
     }
 }

@@ -13,5 +13,12 @@ public class VendigoMask : ItemBaseClass
         useDuration = 8f;
         cooldown = useDuration + cooldown;
     }
-
+    protected override void Use()
+    {
+        OnVendigoMaskUsed?.Invoke();
+    }
+    protected override void Collect()
+    {
+        base.Collect();
+    }
 }
