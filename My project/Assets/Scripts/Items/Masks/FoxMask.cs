@@ -11,7 +11,7 @@ public class FoxMask : ItemBaseClass
         isPassive = true;
         isHasDurationTime = true;
         useDuration = 6f;
-        cooldown = useDuration + 4f;
+        cooldown = useDuration + cooldown;
     }
     protected override void Unequip()
     {

@@ -56,10 +56,7 @@ public class PlayerMovement : MonoBehaviour
     {
         items[equippedItemIndex].Interact();
     }
-    void FoxMaskUsed()
-    {
-        SetDashCooldown(dashCooldown / 2, speed * 1.2f);
-    }
+
     void HandelKeyInventoryDown()
     {
         if (items.Count == 0) return;
@@ -105,6 +102,11 @@ public class PlayerMovement : MonoBehaviour
             items[i].OnItemChange(i == index);
         }
     }
+    #region FoxMaskLogic
+    void FoxMaskUsed()
+    {
+        SetDashCooldown(dashCooldown / 2, speed * 1.2f);
+    }
     public void ResetMovementToBasic()
     {
         dashCooldown = _baseDashCooldown;
@@ -115,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
         dashCooldown = dashCooldownValue;
         speed = speedValue;
     }
-
+    #endregion
     private void FixedUpdate()
     {
         if (isDashing)

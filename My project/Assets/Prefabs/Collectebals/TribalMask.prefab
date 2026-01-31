@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 540669858135853433}
   - component: {fileID: 6459716458086751396}
   - component: {fileID: 4846478597365401227}
+  - component: {fileID: 7621371478120475272}
   m_Layer: 0
   m_Name: TribalMask
   m_TagString: Untagged
@@ -145,7 +146,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.12723303, y: 0.07270503}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -156,5 +157,22 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.5076723, y: 8.561256}
   m_EdgeRadius: 0
+--- !u!114 &7621371478120475272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5550989935190898336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6d350eab45dab94c85fb0e6a09dd964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  trashPoint: {fileID: 0}
+  cooldown: 5
+  isPassive: 0
+  isEquipped: 0

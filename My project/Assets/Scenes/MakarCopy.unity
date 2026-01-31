@@ -202,6 +202,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5115242953341215994, guid: ce24a980ce5dea248b005d981cef798a, type: 3}
+      propertyPath: cooldown
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7728563448477229452, guid: ce24a980ce5dea248b005d981cef798a, type: 3}
       propertyPath: m_Name
       value: FoxMask
@@ -442,7 +446,9 @@ MonoBehaviour:
   patrolPoints: []
   patrolPointHolder: {fileID: 0}
   speed: 0
+  rotateSpeed: 0
   timer: 0
+  fow: {fileID: 0}
 --- !u!1001 &414086855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -983,7 +989,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 258876015}
   trashPoint: {fileID: 344374453}
+  cooldown: 0
   isPassive: 0
+  isEquipped: 0
   arrow: {fileID: 7871011489676895040, guid: de4b15baa682a3a4ea1e7174ed8165c6, type: 3}
 --- !u!212 &1150690110
 SpriteRenderer:

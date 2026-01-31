@@ -6,8 +6,8 @@ using UnityEngine;
 public class ItemBaseClass : MonoBehaviour, Interactable
 {
     [SerializeField] protected Transform player, trashPoint;
+    [SerializeField] protected float cooldown;
     protected bool isCollected = false, isHasDurationTime;
-    protected float cooldown;
     public static event Action<ItemBaseClass> OnItemCollected;
     public bool isPassive, isEquipped;
     protected float useDuration;
