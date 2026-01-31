@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] EnemyFieldOfView fow;
     private bool isChasing = false;
     private bool isWaiting = false;
+    public bool caughtByPlayer = false;
 
     private void OnEnable() => fow.OnPlayerSeenChanged += HandleDetection;
     private void OnDisable() => fow.OnPlayerSeenChanged -= HandleDetection;
@@ -80,6 +81,11 @@ public class EnemyController : MonoBehaviour
         if (isChasing && fow.player != null)
         {
             targetPos = fow.player.transform.position;
+            if (caughtByPlayer)
+            {
+                rb2D.velocity = Vector2.zero;
+                return;
+            }
         }
         else
         {
