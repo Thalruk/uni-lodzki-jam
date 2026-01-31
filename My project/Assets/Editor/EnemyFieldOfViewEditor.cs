@@ -14,7 +14,7 @@ public class EnemyFieldOfViewEditor : Editor
         Vector3 viewAngleA = fow.DirFromAngle(-fow.angle / 2);
         Vector3 viewAngleB = fow.DirFromAngle(fow.angle / 2);
 
-        Handles.color = Color.yellow;
+        Handles.color = Color.red;
         Handles.DrawLine(fow.transform.position, fow.transform.position + viewAngleA * fow.radius);
         Handles.DrawLine(fow.transform.position, fow.transform.position + viewAngleB * fow.radius);
 
