@@ -19,22 +19,25 @@ Shader "Mask/Write"
 
             struct appdata {
                 float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
             };
 
             struct v2f {
                 float4 pos : SV_POSITION;
+                float2 uv : TEXCOORD0;
             };
 
             v2f vert (appdata v)
             {
                 v2f o;
+                o.uv = v.uv * 2 - 1;
                 o.pos = UnityObjectToClipPos(v.vertex);
                 return o;
             }
 
-            fixed4 frag () : SV_Target
+            fixed4 frag (v2f i) : SV_Target
             {
-                return 1;
+                return length(i.uv) <= 1;
             }
             ENDCG
         }
