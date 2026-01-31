@@ -9,7 +9,7 @@ public class BowPart : ItemBaseClass
     protected override void Collect()
     {
         BowCollector.CollectPart();
-        partsUI.text = BowCollector.bowParts.ToString(); 
+        partsUI.text = BowCollector.bowParts.ToString() + "/ 3"; 
         Destroy(gameObject);
     }
 }

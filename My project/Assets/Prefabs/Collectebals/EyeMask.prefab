@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 8282429496585855598}
   - component: {fileID: 1430770021170524927}
   - component: {fileID: 712547083165339212}
+  - component: {fileID: 3766008886685212257}
   m_Layer: 0
   m_Name: EyeMask
   m_TagString: Untagged
@@ -295,3 +296,21 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3766008886685212257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6959747975887242984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6de67aa53d7b3924dbd19e922f2edbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 4
+  maskImage: {fileID: 21300000, guid: ae48060185f61924d9bf778f71fc3c3f, type: 3}
+  isPassive: 1
+  isEquipped: 0
+  eye: {fileID: 460054380308210283}
+  offset: 0.35

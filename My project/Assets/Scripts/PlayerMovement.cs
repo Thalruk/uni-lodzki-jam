@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -16,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashPower;
     [SerializeField] float dashTime;
     [SerializeField] float dashCooldown;
-
+    [SerializeField] List<Image> uiImagesOfMasks = new List<Image>();
     List<ItemBaseClass> items = new List<ItemBaseClass>();
     private float _baseDashCooldown, _baseSpeed;
     public static bool isItemsFull = false;
@@ -30,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
         if (items.Count < 3)
         {
             items.Add(item);
+            uiImagesOfMasks[items.Count - 1].sprite = item.maskImage;
+            uiImagesOfMasks[items.Count-1].color = Color.white;
         }
         else
         {

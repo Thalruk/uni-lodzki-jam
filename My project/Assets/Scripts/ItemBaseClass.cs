@@ -2,16 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemBaseClass : MonoBehaviour, Interactable
 {
-    protected Transform player, trashPoint;
     [SerializeField] protected float cooldown;
+    public Sprite maskImage;
+    protected Transform player, trashPoint;
     protected bool isCollected = false, isHasDurationTime;
     public static event Action<ItemBaseClass> OnItemCollected;
     public bool isPassive, isEquipped;
     protected float useDuration;
-
     float timer;
     private void Awake()
     {
