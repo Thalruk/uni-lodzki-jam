@@ -12,7 +12,21 @@ public class EyeMask : ItemBaseClass
         isPassive = true;
         isHasDurationTime = true;
         useDuration = 6f;
-        cooldown = useDuration + cooldown; 
+        cooldown = useDuration + cooldown;
+ 
     }
-
+    void FindClosestTrackableObject()
+    {
+        float tempDistance = Mathf.Infinity;
+        float currentDistance = 0;
+        for(int i = 0; i < objectsForTracking.Count; i++)
+        {
+            currentDistance = Vector2.Distance(objectsForTracking[i].transform.position, gameObject.transform.position);
+            if (tempDistance > currentDistance)
+            {
+                tempDistance = currentDistance;
+                target = objectsForTracking[i].transform;
+            }
+        }
+    }
 }
