@@ -17,10 +17,12 @@ public class SpiritMask : ItemBaseClass
     protected override void Use()
     {
         camera.GetComponent<PostProcessVolume>().enabled = true;
+        Time.timeScale = 0f;
     }
     protected override void Unequip()
     {
         camera.GetComponent<PostProcessVolume>().enabled = false;
+        Time.timeScale = 1f;
         base.Unequip();
     }
 }
