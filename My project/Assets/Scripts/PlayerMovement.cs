@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Vector2 movementDirection;
     [SerializeField] SpriteRenderer playerSpriteRenderer;
     [SerializeField] Sprite vendigoSprite, playerSprite;
-    [SerializeField] GameObject vendigoLeftHand, vendigoRigthHand, vendigoStateHands;
+    [SerializeField] GameObject vendigoStateHands;
+    [SerializeField] Animation vendigoLeftHand ,vendigoRigthHand;
     [SerializeField] bool canDash = true;
     [SerializeField] bool isDashing = false;
     [SerializeField] float dashPower;
@@ -206,11 +207,11 @@ public class PlayerMovement : MonoBehaviour
         vendigoLeftHandUsed = !vendigoLeftHandUsed;
         if (vendigoLeftHandUsed)
         {
-            vendigoLeftHand.GetComponent<Animation>().Play();
+            vendigoLeftHand.Play();
         }
         else
         {
-            vendigoRigthHand.GetComponent<Animation>().Play();
+            vendigoRigthHand.Play();
         }
     }
     void ResetVendigoState()
