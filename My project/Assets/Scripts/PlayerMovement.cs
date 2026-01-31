@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+[RequireComponent(typeof(HealthSystem),typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float speed;
@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontal;
     float vertical;
     Rigidbody2D rb;
+    HealthSystem health;
     Color colorBase;
     public void AddItemToInventory(ItemBaseClass item)
     {
@@ -48,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
         _baseDashCooldown = dashCooldown;
         _baseSpeed = speed;
         playerSpriteRenderer.sprite = playerSprite;
+        health = GetComponent<HealthSystem>();
+        health.SetStartingHealth(3);
         #region Subscriptions 
         FoxMask.OnFoxMaskUsed += FoxMaskUsed;
         ItemBaseClass.OnItemCollected += AddItemToInventory;

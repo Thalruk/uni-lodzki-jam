@@ -437,6 +437,7 @@ GameObject:
   - component: {fileID: 5456641978689389673}
   - component: {fileID: 4541751155968350562}
   - component: {fileID: 8186430378614795800}
+  - component: {fileID: 3059585605863407251}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -488,8 +489,14 @@ MonoBehaviour:
   dashPower: 5
   dashTime: 1
   dashCooldown: 6
-  uiImagesOfMasks: []
-  uiImagesOfMasksBG: []
+  uiImagesOfMasks:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  uiImagesOfMasksBG:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!50 &4541751155968350562
 Rigidbody2D:
   serializedVersion: 4
@@ -552,6 +559,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.6
+--- !u!114 &3059585605863407251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2612179536013232041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0982d7d1a46931488a44127c57f2ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2748824149244431603
 GameObject:
   m_ObjectHideFlags: 0
