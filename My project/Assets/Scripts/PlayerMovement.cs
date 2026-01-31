@@ -61,7 +61,10 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Dash());
         }
         HandelKeyInventoryDown();
-
+        if (Time.timeScale == 0)
+        {
+            transform.position += (Vector3)movementDirection * speed * Time.unscaledDeltaTime;
+        }
     }
     void UseEquippedItem()
     {
@@ -172,14 +175,16 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-
-        rb.velocity = movementDirection * speed;
+        if (Time.timeScale != 0)
+        {
+            rb.velocity = movementDirection * speed;
+        }
     }
 
     private void LateUpdate()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 dir = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+        Vector2 dir = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
         transform.up = dir;
     }
     private IEnumerator Dash()
