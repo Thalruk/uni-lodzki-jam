@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class BowHandler : ItemBaseClass
 {
-
+    [SerializeField] GameObject arrow;
     private void Start()
     {
         transform.position = trashPoint.position;
+        cooldown = 0.6f;
+        isPassive = false;
+        isHasDurationTime = false;
     }
     public void CollectBowl()
     {
@@ -17,6 +20,7 @@ public class BowHandler : ItemBaseClass
     }
     protected override void Use()
     {
-        print("shoot");
+        
+        Instantiate(arrow, transform.position,transform.rotation);
     }
 }

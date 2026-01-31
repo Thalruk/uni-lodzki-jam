@@ -5,11 +5,18 @@ using UnityEngine;
 
 public class FoxMask : ItemBaseClass
 {
-    public static event Action OnFoxMaskUsed;
+    public static event Action OnFoxMaskUsed, OnFoxMaskEndEffect;
     private void Start()
     {
         isPassive = true;
-        cooldown = 0;
+        isHasDurationTime = true;
+        useDuration = 6f;
+        cooldown = useDuration + cooldown;
+    }
+    protected override void Unequip()
+    {
+        OnFoxMaskEndEffect?.Invoke();
+        base.Unequip();
     }
     protected override void Use()
     {
@@ -20,8 +27,12 @@ public class FoxMask : ItemBaseClass
     {
         base.Collect();
     }
-    private void OnEnable()
+    private void OnDisable()
     {
-        Use();
+        OnFoxMaskEndEffect?.Invoke();
+    }
+    private void OnDestroy()
+    {
+        OnFoxMaskEndEffect?.Invoke();
     }
 }
