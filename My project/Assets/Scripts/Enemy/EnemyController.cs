@@ -9,9 +9,15 @@ public class EnemyController : MonoBehaviour
 
     Rigidbody2D rb2D;
     [SerializeField] float speed;
-
+    [SerializeField] float rotateSpeed;
     [SerializeField] float timer = 0;
 
+    [SerializeField] EnemyFieldOfView fow;
+    private bool isChasing = false;
+    bool isWaiting = false;
+
+    private void OnEnable() => fow.OnPlayerSeenChanged += HandleDetection;
+    private void OnDisable() => fow.OnPlayerSeenChanged -= HandleDetection;
     private void Awake()
     {
         patrolPoints.Clear();
@@ -25,31 +31,54 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void HandleDetection(bool spotted)
+    {
+        isChasing = spotted;
+        if (isChasing) isWaiting = false;
+    }
     private void Update()
     {
-        if (Vector2.Distance(transform.position, patrolPoints[actualPatrolPoint].transform.position) < patrolPoints[actualPatrolPoint].checkRadius)
+        float distance = Vector2.Distance(transform.position, patrolPoints[actualPatrolPoint].transform.position);
+
+        if (distance < patrolPoints[actualPatrolPoint].checkRadius && !isWaiting)
         {
-            if (patrolPoints[actualPatrolPoint].waitTime != 0)
+            isWaiting = true;
+        }
+
+        if (isWaiting)
+        {
+            timer += Time.deltaTime;
+            if (timer >= patrolPoints[actualPatrolPoint].waitTime)
             {
-                if (timer >= patrolPoints[actualPatrolPoint].waitTime)
-                {
-                    actualPatrolPoint = (actualPatrolPoint + 1) % patrolPoints.Count;
-                    timer = 0;
-                }
-                else
-                {
-                    timer += Time.deltaTime;
-                }
-            }
-            else
-            {
+                timer = 0;
+                isWaiting = false;
                 actualPatrolPoint = (actualPatrolPoint + 1) % patrolPoints.Count;
             }
         }
-        Vector2 direction = (patrolPoints[actualPatrolPoint].transform.position - transform.position).normalized;
-        rb2D.SetRotation(Quaternion.Euler(direction));
-        rb2D.velocity = direction * speed;
     }
 
+    private void FixedUpdate()
+    {
+        Vector2 targetPos;
 
+        if (isChasing && fow.player != null)
+        {
+            targetPos = fow.player.transform.position;
+        }
+        else
+        {
+            if (isWaiting)
+            {
+                rb2D.velocity = Vector2.zero;
+                return;
+            }
+            targetPos = patrolPoints[actualPatrolPoint].transform.position;
+        }
+
+        Vector2 direction = (targetPos - rb2D.position).normalized;
+        rb2D.velocity = transform.right * speed;
+
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, targetAngle), rotateSpeed * Time.fixedDeltaTime);
+    }
 }

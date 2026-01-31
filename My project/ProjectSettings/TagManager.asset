@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TrashPoint
   - PlayerGraphics
+  - Obstacle
   layers:
   - Default
   - TransparentFX
