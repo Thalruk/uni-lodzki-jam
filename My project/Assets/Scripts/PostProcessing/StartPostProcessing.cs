@@ -19,9 +19,9 @@ public class StartPostProcessing : MonoBehaviour
 
         material.SetTexture("_SourceTex", source);
         Graphics.Blit(source, currentDest, material, 1);
-        currentSource = currentDest;
+        //currentSource = currentDest;
         material.SetTexture("_SourceTex", currentSource);
-        Graphics.Blit(currentSource, destination, material, 0);
+        Graphics.Blit(currentDest, destination, material, 0);
 
         RenderTexture.ReleaseTemporary(currentSource);
         RenderTexture.ReleaseTemporary(currentDest);

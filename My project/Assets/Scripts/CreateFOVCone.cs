@@ -18,10 +18,12 @@ public class CreateFOVCone : MonoBehaviour
 
     // TODO: ustawic prawidlowo kierunek widzenia gracza, zasieg i kat widzenia
     Vector2 playerViewDir = Vector2.right;
+    [Range(0.1f, 20f)]
     [SerializeField] float viewRange = 8f;
     float rayCastRange;
+    [Range(0.1f, 120f)]
     [SerializeField] float playerFOV = 90f;
-
+    [Range(0.001f, 0.1f)]
     [SerializeField] float epsilon = 0.01f;
 
     // MeshVariables
@@ -34,6 +36,8 @@ public class CreateFOVCone : MonoBehaviour
 
     private void Start()
     {
+        playerViewDir = -transform.up;
+
         rayCastRange = viewRange / Mathf.Cos(playerFOV * 0.5f * Mathf.Deg2Rad);
         GetComponent<CircleCollider2D>().radius = rayCastRange;
         vertices = new List<Vector3>();
@@ -78,8 +82,9 @@ public class CreateFOVCone : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
+        playerViewDir = -transform.up;
         rayPoints.Clear();
 
         foreach (PolygonCollider2D obstacle in obstacles)
