@@ -60,7 +60,7 @@ public class BeholderMiniEye : MonoBehaviour
             fireTimer = fireRate;
         }
     }
-
+    public void SetFireRate(float newRate) => fireRate = newRate;
     void Shoot(Transform target = null)
     {
         if (projectiles.Count == 0) return;
