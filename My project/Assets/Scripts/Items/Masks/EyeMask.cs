@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class EyeMask : ItemBaseClass
+{
+    List<GameObject> objectsForTracking = new List<GameObject>();
+    Transform target;
+    private void Start()
+    {
+        isPassive = true;
+        isHasDurationTime = true;
+        useDuration = 6f;
+        cooldown = useDuration + cooldown;
+ 
+    }
+    void FindClosestTrackableObject()
+    {
+        float tempDistance = Mathf.Infinity;
+        float currentDistance = 0;
+        for(int i = 0; i < objectsForTracking.Count; i++)
+        {
+            currentDistance = Vector2.Distance(objectsForTracking[i].transform.position, gameObject.transform.position);
+            if (tempDistance > currentDistance)
+            {
+                tempDistance = currentDistance;
+                target = objectsForTracking[i].transform;
+            }
+        }
+    }
+}

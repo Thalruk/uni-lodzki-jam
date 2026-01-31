@@ -3,36 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FoxMask : ItemBaseClass
+public class VendigoMask : ItemBaseClass
 {
-    public static event Action OnFoxMaskUsed, OnFoxMaskEndEffect;
+    public static event Action OnVendigoMaskUsed, OnVendigoEndEffect;
     private void Start()
     {
         isPassive = true;
         isHasDurationTime = true;
-        useDuration = 6f;
+        useDuration = 8f;
         cooldown = useDuration + cooldown;
-    }
-    protected override void Unequip()
-    {
-        OnFoxMaskEndEffect?.Invoke();
-        base.Unequip();
     }
     protected override void Use()
     {
-        OnFoxMaskUsed?.Invoke();
-        
+        OnVendigoMaskUsed?.Invoke();
     }
     protected override void Collect()
     {
         base.Collect();
     }
+    protected override void Unequip()
+    {
+        OnVendigoEndEffect?.Invoke();
+        base.Unequip();
+    }
     private void OnDisable()
     {
-        OnFoxMaskEndEffect?.Invoke();
+        OnVendigoEndEffect?.Invoke();
     }
     private void OnDestroy()
     {
-        OnFoxMaskEndEffect?.Invoke();
+        OnVendigoEndEffect?.Invoke();
     }
 }

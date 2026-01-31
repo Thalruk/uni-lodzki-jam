@@ -5,23 +5,35 @@ using UnityEngine;
 
 public class ItemBaseClass : MonoBehaviour, Interactable
 {
-    [SerializeField] protected Transform player, trashPoint;
-    protected bool isCollected = false;
-    protected float cooldown;
+    protected Transform player, trashPoint;
+    [SerializeField] protected float cooldown;
+    protected bool isCollected = false, isHasDurationTime;
     public static event Action<ItemBaseClass> OnItemCollected;
-    public bool isPassive;
+    public bool isPassive, isEquipped;
+    protected float useDuration;
+
     float timer;
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("PlayerGraphics").transform;
+        trashPoint = GameObject.FindWithTag("TrashPoint").transform;
+    }
     protected virtual void Use()
     {
 
     }
+
     protected virtual void Collect()
     {
         isCollected = true;
         OnItemCollected?.Invoke(this);
         gameObject.transform.parent = player;
-        gameObject.transform.position = player.position;
-        gameObject.SetActive(false);
+        gameObject.transform.position = trashPoint.position;
+        if(gameObject.TryGetComponent<Collider2D>(out Collider2D collider))
+        {
+            collider.enabled = false;
+        }
+        
     }
     void OnCollected()
     {
@@ -30,16 +42,43 @@ public class ItemBaseClass : MonoBehaviour, Interactable
     }
     public void Interact()
     {
-        if(isCollected && !isPassive && Time.time > timer)
+        if(isEquipped && isCollected && Time.time > timer)
         {
             Use();
             timer = Time.time + cooldown;
+            if (isHasDurationTime)
+            {
+                Invoke(nameof(Unequip), useDuration);
+            }
         }
-        if (isPassive)
+    }
+    protected virtual void Unequip() 
+    {
+        gameObject.transform.position = trashPoint.position;
+        isEquipped = false;
+    }
+    public bool TryEquip()
+    {
+        if(Time.time > timer)
         {
-            Use();
+            return true;
+        }else
+        {
+            return false;
         }
-        
+    }
+    public void OnItemChange(bool isThisItem)
+    {
+        if (isThisItem)
+        {
+            gameObject.transform.localPosition = player.localPosition;
+            isEquipped = true;
+        }
+        else
+        {
+            gameObject.transform.position = trashPoint.position;
+            isEquipped = false;
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
