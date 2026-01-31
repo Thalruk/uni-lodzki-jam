@@ -15,7 +15,7 @@ public class EyeMask : ItemBaseClass
         useDuration = 6f;
         cooldown = useDuration + cooldown;
         objectsForTracking = GameObject.FindGameObjectsWithTag("Track").ToList();
-
+        eye = GetComponentInChildren<Transform>();
     }
     protected override void Use()
     {
