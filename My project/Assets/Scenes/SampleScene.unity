@@ -227,7 +227,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5a25745f79f142a40a97b1d6975f3088, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3ffd32fb33b559748b12e69273681847, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -286,10 +286,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eyePrefab: {fileID: 9073372558426952292, guid: 2470bbda8219b6641a64f5155c0bf5ed, type: 3}
   eyeHolder: {fileID: 760713044}
-  eyeCount: 10
-  minRadius: 10
-  maxRadius: 15
-  randomness: 0.382
+  eyeCount: 20
+  minRadius: 5
+  maxRadius: 20
+  randomness: 0.587
 --- !u!114 &67917349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca11aa0afdc6dd428e83cb14aae0244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  criticalDistance: 25
 --- !u!1 &228937229
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,6 +802,7 @@ MonoBehaviour:
   dashPower: 25
   dashTime: 0.2
   dashCooldown: 1
+  uiImagesOfMasks: []
 --- !u!4 &1193219139
 Transform:
   m_ObjectHideFlags: 0

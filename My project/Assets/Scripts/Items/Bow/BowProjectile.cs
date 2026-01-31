@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BowProjectile : MonoBehaviour
@@ -9,13 +7,24 @@ public class BowProjectile : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(-transform.up*arrowSpeed, ForceMode2D.Impulse);
+        rb.AddForce(-transform.up * arrowSpeed, ForceMode2D.Impulse);
     }
     private void FixedUpdate()
     {
-        if(Mathf.Abs(rb.velocity.y)<=0.2 && Mathf.Abs(rb.velocity.x) <= 0.2)
+        if (Mathf.Abs(rb.velocity.y) <= 0.2 && Mathf.Abs(rb.velocity.x) <= 0.2)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("MiniEye"))
+        {
+            if (collision.TryGetComponent(out BeholderMiniEye eye))
+            {
+                eye.Die();
+            }
         }
     }
 }

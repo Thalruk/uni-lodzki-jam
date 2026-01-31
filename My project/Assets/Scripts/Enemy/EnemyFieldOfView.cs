@@ -25,7 +25,7 @@ public class EnemyFieldOfView : MonoBehaviour
     private void Awake()
     {
         circleCollider = GetComponent<CircleCollider2D>();
-        circleCollider.radius = radius;
+        circleCollider.radius = radius / transform.localScale.x;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -78,13 +78,15 @@ public class EnemyFieldOfView : MonoBehaviour
             playerInView = false;
         }
     }
+    private void OnValidate()
+    {
+        if (circleCollider != null) circleCollider.radius = radius / transform.localScale.x;
+    }
     private void OnDrawGizmos()
     {
         if (transform == null) return;
 
-        Gizmos.color = Color.yellow;
-
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.color = Color.red;
 
         Vector3 viewAngleA = DirFromAngle(-angle / 2);
         Vector3 viewAngleB = DirFromAngle(angle / 2);
