@@ -54,13 +54,14 @@ Shader "Sprites/Test"
             v2f vert (appdata v)
             {
                 v2f o;
+                o.uv = v.uv;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                return float4(1, 0, 0, 1);
+                return tex2D(_MainTex, i.uv);
             }
 
         ENDCG
