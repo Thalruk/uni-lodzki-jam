@@ -411,6 +411,8 @@ MonoBehaviour:
   cooldown: 0
   isPassive: 0
   isEquipped: 0
+  eye: {fileID: 0}
+  offset: 0
 --- !u!1001 &414086855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1369,8 +1371,12 @@ PrefabInstance:
       value: SpiritMask
       objectReference: {fileID: 0}
     - target: {fileID: 9010836015764122689, guid: e2af9807901d3cf49b992bc9d299ff96, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9010836015764122689, guid: e2af9807901d3cf49b992bc9d299ff96, type: 3}
       propertyPath: m_Constraints
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
