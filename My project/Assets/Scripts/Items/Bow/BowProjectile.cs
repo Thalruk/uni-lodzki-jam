@@ -13,7 +13,7 @@ public class BowProjectile : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(rb.velocity.y<=0.2 && rb.velocity.x <= 0.2)
+        if(Mathf.Abs(rb.velocity.y)<=0.2 && Mathf.Abs(rb.velocity.x) <= 0.2)
         {
             Destroy(gameObject);
         }
