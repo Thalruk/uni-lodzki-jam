@@ -12,6 +12,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float rotateSpeed;
     [SerializeField] float timer = 0;
 
+    [SerializeField] EnemyFieldOfView fow;
+    private bool isChasing = false;
+    bool isWaiting = false;
+
+    private void OnEnable() => fow.OnPlayerSeenChanged += HandleDetection;
+    private void OnDisable() => fow.OnPlayerSeenChanged -= HandleDetection;
     private void Awake()
     {
         patrolPoints.Clear();
@@ -25,8 +31,11 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    bool isWaiting = false;
-
+    private void HandleDetection(bool spotted)
+    {
+        isChasing = spotted;
+        if (isChasing) isWaiting = false;
+    }
     private void Update()
     {
         float distance = Vector2.Distance(transform.position, patrolPoints[actualPatrolPoint].transform.position);
@@ -50,19 +59,26 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isWaiting)
-        {
-            rb2D.velocity = Vector2.zero;
-            return;
-        }
-        Vector2 targetPos = patrolPoints[actualPatrolPoint].transform.position;
-        Vector2 direction = (targetPos - rb2D.position).normalized;
+        Vector2 targetPos;
 
-        rb2D.velocity = direction * speed;
+        if (isChasing && fow.player != null)
+        {
+            targetPos = fow.player.transform.position;
+        }
+        else
+        {
+            if (isWaiting)
+            {
+                rb2D.velocity = Vector2.zero;
+                return;
+            }
+            targetPos = patrolPoints[actualPatrolPoint].transform.position;
+        }
+
+        Vector2 direction = (targetPos - rb2D.position).normalized;
+        rb2D.velocity = transform.right * speed;
 
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.fixedDeltaTime);
-
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, targetAngle), rotateSpeed * Time.fixedDeltaTime);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyFieldOfView : MonoBehaviour
@@ -11,6 +12,9 @@ public class EnemyFieldOfView : MonoBehaviour
     public LayerMask obstacleMask;
 
     public CircleCollider2D circleCollider;
+
+    public event Action<bool> OnPlayerSeenChanged;
+    private bool lastDetectedState = false;
 
     public Vector3 DirFromAngle(float angleInDegrees)
     {
@@ -58,6 +62,11 @@ public class EnemyFieldOfView : MonoBehaviour
                     playerInView = true;
                 }
             }
+        }
+        if (playerInView != lastDetectedState)
+        {
+            lastDetectedState = playerInView;
+            OnPlayerSeenChanged?.Invoke(playerInView);
         }
     }
 

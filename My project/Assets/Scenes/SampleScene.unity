@@ -168,7 +168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5314901629661975315, guid: 9c0ace137f986fe4f9a9f16c1363c56a, type: 3}
       propertyPath: checkRadius
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7372347587653746092, guid: 9c0ace137f986fe4f9a9f16c1363c56a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -354,9 +354,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolPoints: []
   patrolPointHolder: {fileID: 1196237901}
-  speed: 2
-  rotateSpeed: 360
+  speed: 5
+  rotateSpeed: 120
   timer: 0
+  fow: {fileID: 1790133460}
 --- !u!58 &344762675
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1195,8 +1196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb839c6a75fa3e341858d15d2f97ba3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2.8
-  angle: 71
+  radius: 10
+  angle: 110.55
   player: {fileID: 0}
   playerInView: 0
   obstacleMask:
@@ -1252,7 +1253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5314901629661975315, guid: 9c0ace137f986fe4f9a9f16c1363c56a, type: 3}
       propertyPath: waitTime
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5314901629661975315, guid: 9c0ace137f986fe4f9a9f16c1363c56a, type: 3}
       propertyPath: checkRadius
@@ -1260,7 +1261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7372347587653746092, guid: 9c0ace137f986fe4f9a9f16c1363c56a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.56
+      value: 50.8
       objectReference: {fileID: 0}
     - target: {fileID: 7372347587653746092, guid: 9c0ace137f986fe4f9a9f16c1363c56a, type: 3}
       propertyPath: m_LocalPosition.y
