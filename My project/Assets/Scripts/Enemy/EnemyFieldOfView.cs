@@ -8,11 +8,14 @@ public class EnemyFieldOfView : MonoBehaviour
     public PlayerMovement player;
 
     public bool playerInView = false;
+    public LayerMask obstacleMask;
 
     public CircleCollider2D circleCollider;
+
     public Vector3 DirFromAngle(float angleInDegrees)
     {
-        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), 0);
+        angleInDegrees += transform.eulerAngles.z;
+        return new Vector3(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0);
     }
 
     private void Awake()
@@ -20,6 +23,7 @@ public class EnemyFieldOfView : MonoBehaviour
         circleCollider = GetComponent<CircleCollider2D>();
         circleCollider.radius = radius;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -27,29 +31,34 @@ public class EnemyFieldOfView : MonoBehaviour
             player = collision.GetComponent<PlayerMovement>();
         }
     }
+
     private void Update()
     {
-        Vector2 viewAngleA = DirFromAngle(-angle / 2);
-        Vector2 viewAngleB = DirFromAngle(angle / 2);
+        playerInView = false;
+
         if (player)
         {
-            Vector2 direction = (player.transform.position - transform.position).normalized;
-            //Debug.Log($"LEFT {viewAngleA.normalized}");
-            //Debug.Log($"DIR {direction}");
-            //Debug.Log($"RIGHT {viewAngleB.normalized}");
-            Debug.DrawLine(transform.position, transform.position + (Vector3)direction * 10, Color.red);
-            Debug.Log($"dir-a {Vector2.Angle(direction, viewAngleA)}");
-            Debug.Log($"dir-a {Vector2.Angle(direction, viewAngleB)}");
-            if (Vector2.Angle(direction, viewAngleA) <= angle && Vector2.Angle(direction, viewAngleB) <= angle)
+            Vector2 dirToPlayer = (player.transform.position - transform.position).normalized;
+            float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+
+            float angleToPlayer = Vector2.Angle(transform.right, dirToPlayer);
+
+            if (angleToPlayer < angle / 2f)
             {
-                playerInView = true;
-            }
-            else
-            {
-                playerInView = false;
+                Debug.DrawLine(transform.position, player.transform.position, Color.blue);
+
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, dirToPlayer, distanceToPlayer, obstacleMask);
+
+                if (hit.collider == null)
+                {
+                    playerInView = true;
+                }
+                else if (hit.collider.CompareTag("Player"))
+                {
+                    playerInView = true;
+                }
             }
         }
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -59,5 +68,19 @@ public class EnemyFieldOfView : MonoBehaviour
             player = null;
             playerInView = false;
         }
+    }
+    private void OnDrawGizmos()
+    {
+        if (transform == null) return;
+
+        Gizmos.color = Color.yellow;
+
+        Gizmos.DrawWireSphere(transform.position, radius);
+
+        Vector3 viewAngleA = DirFromAngle(-angle / 2);
+        Vector3 viewAngleB = DirFromAngle(angle / 2);
+
+        Gizmos.DrawLine(transform.position, transform.position + viewAngleA * radius);
+        Gizmos.DrawLine(transform.position, transform.position + viewAngleB * radius);
     }
 }

@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
 
     Rigidbody2D rb2D;
     [SerializeField] float speed;
-
+    [SerializeField] float rotateSpeed;
     [SerializeField] float timer = 0;
 
     private void Awake()
@@ -25,31 +25,44 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    bool isWaiting = false;
+
     private void Update()
     {
-        if (Vector2.Distance(transform.position, patrolPoints[actualPatrolPoint].transform.position) < patrolPoints[actualPatrolPoint].checkRadius)
+        float distance = Vector2.Distance(transform.position, patrolPoints[actualPatrolPoint].transform.position);
+
+        if (distance < patrolPoints[actualPatrolPoint].checkRadius && !isWaiting)
         {
-            if (patrolPoints[actualPatrolPoint].waitTime != 0)
+            isWaiting = true;
+        }
+
+        if (isWaiting)
+        {
+            timer += Time.deltaTime;
+            if (timer >= patrolPoints[actualPatrolPoint].waitTime)
             {
-                if (timer >= patrolPoints[actualPatrolPoint].waitTime)
-                {
-                    actualPatrolPoint = (actualPatrolPoint + 1) % patrolPoints.Count;
-                    timer = 0;
-                }
-                else
-                {
-                    timer += Time.deltaTime;
-                }
-            }
-            else
-            {
+                timer = 0;
+                isWaiting = false;
                 actualPatrolPoint = (actualPatrolPoint + 1) % patrolPoints.Count;
             }
         }
-        Vector2 direction = (patrolPoints[actualPatrolPoint].transform.position - transform.position).normalized;
-        rb2D.SetRotation(Quaternion.Euler(direction));
-        rb2D.velocity = direction * speed;
     }
 
+    private void FixedUpdate()
+    {
+        if (isWaiting)
+        {
+            rb2D.velocity = Vector2.zero;
+            return;
+        }
+        Vector2 targetPos = patrolPoints[actualPatrolPoint].transform.position;
+        Vector2 direction = (targetPos - rb2D.position).normalized;
 
+        rb2D.velocity = direction * speed;
+
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.fixedDeltaTime);
+
+    }
 }
