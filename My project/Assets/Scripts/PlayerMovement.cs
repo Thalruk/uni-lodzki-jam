@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         _baseSpeed = speed;
         FoxMask.OnFoxMaskUsed += FoxMaskUsed;
         ItemBaseClass.OnItemCollected += AddItemToInventory;
+        FoxMask.OnFoxMaskEndEffect += ResetMovementToBasic;
     }
     private void Update()
     {
@@ -62,30 +63,37 @@ public class PlayerMovement : MonoBehaviour
     void HandelKeyInventoryDown()
     {
         if (items.Count == 0) return;
-        if (Input.GetKeyDown(KeyCode.Alpha1) && items.Count>0)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && items.Count>0 && items[0].TryEquip())
         {
             EquipItem(0);
             equippedItemIndex = 0;
+            if (items[equippedItemIndex].isPassive)
+            {
+                items[equippedItemIndex].Interact();
+            }
 
 
-        }else if (Input.GetKeyDown(KeyCode.Alpha2) && items.Count > 1)
+        }else if (Input.GetKeyDown(KeyCode.Alpha2) && items.Count > 1 && items[1].TryEquip())
         {
             EquipItem(1);
             equippedItemIndex = 1;
+            if (items[equippedItemIndex].isPassive)
+            {
+                items[equippedItemIndex].Interact();
+            }
 
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && items.Count > 2) 
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && items.Count > 2 && items[2].TryEquip()) 
         {
             EquipItem(2);
             equippedItemIndex = 2;
+            if (items[equippedItemIndex].isPassive)
+            {
+                items[equippedItemIndex].Interact();
+            }
 
         }
-        bool passive = items[equippedItemIndex].isPassive;
-        if (passive)
-        {
-            items[equippedItemIndex].Interact();
-        }
-        else if (!passive && Input.GetMouseButtonDown(0))
+        if (!items[equippedItemIndex].isPassive && Input.GetMouseButtonDown(0))
         {
             UseEquippedItem();
         }
@@ -94,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
     {
         for(int i = 0; i < items.Count; i++)
         {
-            items[i].gameObject.SetActive(i == index);
+            items[i].OnItemChange(i == index);
         }
     }
     public void ResetMovementToBasic()
@@ -133,10 +141,12 @@ public class PlayerMovement : MonoBehaviour
     {
         FoxMask.OnFoxMaskUsed -= FoxMaskUsed;
         ItemBaseClass.OnItemCollected -= AddItemToInventory;
+        FoxMask.OnFoxMaskEndEffect -= ResetMovementToBasic;
     }
     private void OnDestroy()
     {
         FoxMask.OnFoxMaskUsed -= FoxMaskUsed;
         ItemBaseClass.OnItemCollected -= AddItemToInventory;
+        FoxMask.OnFoxMaskEndEffect -= ResetMovementToBasic;
     }
 }
