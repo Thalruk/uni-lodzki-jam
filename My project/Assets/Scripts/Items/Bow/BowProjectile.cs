@@ -9,7 +9,7 @@ public class BowProjectile : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(transform.right*arrowSpeed, ForceMode2D.Impulse);
+        rb.AddForce(-transform.up*arrowSpeed, ForceMode2D.Impulse);
     }
     private void FixedUpdate()
     {
