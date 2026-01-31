@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ItemBaseClass : MonoBehaviour, Interactable
 {
-    [SerializeField] Transform trashPoint;
+    [SerializeField] protected Transform player, trashPoint;
     protected bool isCollected = false;
     protected float cooldown;
     public static event Action<ItemBaseClass> OnItemCollected;
@@ -19,12 +19,14 @@ public class ItemBaseClass : MonoBehaviour, Interactable
     {
         isCollected = true;
         OnItemCollected?.Invoke(this);
+        gameObject.transform.parent = player;
+        gameObject.transform.position = player.position;
+        gameObject.SetActive(false);
     }
     void OnCollected()
     {
-        if(PlayerMovement.isItemsFull) return;
+        if(PlayerMovement.isItemsFull) return;     
         Collect();
-        gameObject.transform.position = trashPoint.position;
     }
     public void Interact()
     {

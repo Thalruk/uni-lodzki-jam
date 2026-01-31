@@ -14,6 +14,7 @@ public static class BowCollector
         if(bowParts >= 3)
         {
             isBowCompleted = true;
+            GameObject.FindAnyObjectByType<BowHandler>().CollectBowl();
         }
     }
 }
