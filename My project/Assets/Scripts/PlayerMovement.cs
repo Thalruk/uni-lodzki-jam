@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(HealthSystem),typeof(Rigidbody2D))]
+[RequireComponent(typeof(HealthSystem), typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float speed;
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Awake()
     {
-        colorBase = uiImagesOfMasksBG[0].color;
+        //colorBase = uiImagesOfMasksBG[0].color;
         rb = GetComponent<Rigidbody2D>();
         _baseDashCooldown = dashCooldown;
         _baseSpeed = speed;
@@ -70,10 +70,10 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Dash());
         }
         HandelKeyInventoryDown();
-        if (Time.timeScale == 0)
-        {
-            transform.position += (Vector3)movementDirection * speed * Time.unscaledDeltaTime;
-        }
+        //if (Time.timeScale == 0)
+        //{
+        transform.position += (Vector3)movementDirection * speed * Time.unscaledDeltaTime;
+        //}
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
         transform.up = dir;
@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
         {
             EquipItem(0);
             equippedItemIndex = 0;
-            
+
             if (items[equippedItemIndex].isPassive)
             {
                 items[equippedItemIndex].Interact();
@@ -150,12 +150,12 @@ public class PlayerMovement : MonoBehaviour
             uiImagesOfMasks[i].color = Color.white;
         }
     }
-    
+
     void GetRidOfItem(int index)
     {
         var item = items[index];
         item.transform.parent = null;
-        item.gameObject.transform.position = transform.position+(transform.right*2f);
+        item.gameObject.transform.position = transform.position + (transform.right * 2f);
         item.GetComponent<Collider2D>().enabled = true;
         items.RemoveAt(index);
         UIUpdate();
@@ -165,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
         {
             items[i].OnItemChange(i == index);
-            uiImagesOfMasksBG[i].color = i == index ? new Color32(255, 60, 50,100) : colorBase;
+            //uiImagesOfMasksBG[i].color = i == index ? new Color32(255, 60, 50, 100) : colorBase;
 
         }
     }
@@ -220,7 +220,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Time.timeScale != 0)
         {
-            rb.velocity = movementDirection * speed;
+            //rb.velocity = movementDirection * speed;
         }
         /*
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
