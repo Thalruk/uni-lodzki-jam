@@ -4,6 +4,9 @@ Shader "Unlit/Cone"
     {
         _MainTex ("Texture", 2D) = "white" {}
     }
+
+
+
     SubShader
     {
         Tags { "Queue"="Transparent" "RenderType"="Transparent" }
@@ -26,6 +29,11 @@ Shader "Unlit/Cone"
             #include "UnityCG.cginc"
 
             float _ViewRange;
+
+            float easeInQuint(float x) 
+            {
+                return 1 - sqrt(1 - pow(x, 2));
+            }
 
             struct appdata {
                 float4 vertex : POSITION;
@@ -50,7 +58,7 @@ Shader "Unlit/Cone"
                 float maxLen = _ViewRange;
 
                 float3 col = float3(0, 0, 0);
-                float transparency = len < maxLen;
+                float transparency = 1 - easeInQuint(len / maxLen);//len < maxLen;
                 return 1 * transparency;
             }
             ENDCG

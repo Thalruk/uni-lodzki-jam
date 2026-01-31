@@ -37,7 +37,7 @@ Shader "Mask/Write"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                return length(i.uv) <= 1;
+                return lerp(1, 0, length(i.uv));//length(i.uv) <= 1;
             }
             ENDCG
         }
