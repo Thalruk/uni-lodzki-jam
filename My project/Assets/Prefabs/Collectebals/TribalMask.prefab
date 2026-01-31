@@ -171,8 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d350eab45dab94c85fb0e6a09dd964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  trashPoint: {fileID: 0}
   cooldown: 5
   isPassive: 0
   isEquipped: 0

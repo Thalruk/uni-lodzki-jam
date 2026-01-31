@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         if (items.Any(x => x.isPassive && x.isEquipped)) return;
-        if (Input.GetKeyDown(KeyCode.Alpha1) && items.Count>0 && items[0].TryEquip())
+        if (Input.GetKeyDown(KeyCode.Alpha1) && items.Count > 0 && items[0].TryEquip())
         {
             EquipItem(0);
             equippedItemIndex = 0;
@@ -93,7 +93,8 @@ public class PlayerMovement : MonoBehaviour
             }
 
 
-        }else if (Input.GetKeyDown(KeyCode.Alpha2) && items.Count > 1 && items[1].TryEquip())
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && items.Count > 1 && items[1].TryEquip())
         {
             EquipItem(1);
             equippedItemIndex = 1;
@@ -103,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && items.Count > 2 && items[2].TryEquip()) 
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && items.Count > 2 && items[2].TryEquip())
         {
             EquipItem(2);
             equippedItemIndex = 2;
@@ -117,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void EquipItem(int index)
     {
-        for(int i = 0; i < items.Count; i++)
+        for (int i = 0; i < items.Count; i++)
         {
             items[i].OnItemChange(i == index);
         }
@@ -164,6 +165,7 @@ public class PlayerMovement : MonoBehaviour
         vendigoStateHands.SetActive(false);
     }
     #endregion
+
     private void FixedUpdate()
     {
         if (isDashing)
@@ -172,6 +174,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.velocity = movementDirection * speed;
+    }
+
+    private void LateUpdate()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+        transform.up = dir;
     }
     private IEnumerator Dash()
     {

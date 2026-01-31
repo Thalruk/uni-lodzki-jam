@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,6 +6,8 @@ public class EyeMask : ItemBaseClass
 {
     List<GameObject> objectsForTracking = new List<GameObject>();
     Transform target;
+    [SerializeField] Transform eye;
+    [SerializeField] float offset;
     private void Start()
     {
         isPassive = true;
@@ -14,7 +15,7 @@ public class EyeMask : ItemBaseClass
         useDuration = 6f;
         cooldown = useDuration + cooldown;
         objectsForTracking = GameObject.FindGameObjectsWithTag("Track").ToList();
- 
+
     }
     protected override void Use()
     {
@@ -24,7 +25,7 @@ public class EyeMask : ItemBaseClass
     {
         float tempDistance = Mathf.Infinity;
         float currentDistance = 0;
-        for(int i = 0; i < objectsForTracking.Count; i++)
+        for (int i = 0; i < objectsForTracking.Count; i++)
         {
             currentDistance = Vector2.Distance(objectsForTracking[i].transform.position, gameObject.transform.position);
             if (tempDistance > currentDistance)
@@ -34,5 +35,14 @@ public class EyeMask : ItemBaseClass
             }
         }
         print(target.name);
+    }
+
+    private void Update()
+    {
+        if (target)
+        {
+            Vector3 dir = (target.position - transform.position).normalized;
+            eye.transform.position = transform.position + dir * offset;
+        }
     }
 }
