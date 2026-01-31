@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class ItemBaseClass : MonoBehaviour, Interactable
 {
+    [SerializeField] Transform trashPoint;
     protected bool isCollected = false;
     protected float cooldown;
     public static event Action<ItemBaseClass> OnItemCollected;
-    public static bool isPassive;
+    public bool isPassive;
+    float timer;
     protected virtual void Use()
     {
 
@@ -22,12 +24,20 @@ public class ItemBaseClass : MonoBehaviour, Interactable
     {
         if(PlayerMovement.isItemsFull) return;
         Collect();
-        Destroy(gameObject);
+        gameObject.transform.position = trashPoint.position;
     }
     public void Interact()
     {
-        if(isCollected && !isPassive)
-        Use();
+        if(isCollected && !isPassive && Time.time > timer)
+        {
+            Use();
+            timer = Time.time + cooldown;
+        }
+        if (isPassive)
+        {
+            Use();
+        }
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

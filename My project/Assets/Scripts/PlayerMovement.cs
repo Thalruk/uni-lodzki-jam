@@ -61,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void HandelKeyInventoryDown()
     {
+        if (items.Count == 0) return;
         if (Input.GetKeyDown(KeyCode.Alpha1) && items.Count>0)
         {
             EquipItem(0);
@@ -79,7 +80,12 @@ public class PlayerMovement : MonoBehaviour
             equippedItemIndex = 2;
 
         }
-        if (Input.GetMouseButtonDown(0))
+        bool passive = items[equippedItemIndex].isPassive;
+        if (passive)
+        {
+            items[equippedItemIndex].Interact();
+        }
+        else if (!passive && Input.GetMouseButtonDown(0))
         {
             UseEquippedItem();
         }
