@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8097335610100471361}
   - component: {fileID: 8804900587838840639}
   m_Layer: 0
-  m_Name: BowPart
+  m_Name: BowPart 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.6876733, y: 0.43, z: 0}
-  m_LocalScale: {x: 0.47, y: 0.47, z: 0.47}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 53f08414c80b31846873500ffc081298, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8b2547fcfd6afe54299619beb40acaa9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -119,18 +119,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03530535, y: 0.025981069}
+  m_Offset: {x: -0.09425068, y: -0.010828495}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.77, y: 1.77}
+    oldSize: {x: 1.43, y: 3.31}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7061028, y: 1.7943673}
+  m_Size: {x: 1.6732183, y: 3.3024054}
   m_EdgeRadius: 0
 --- !u!50 &8097335610100471361
 Rigidbody2D:

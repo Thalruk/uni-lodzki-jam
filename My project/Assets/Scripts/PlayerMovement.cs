@@ -149,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
     {
         var item = items[index];
         item.transform.parent = null;
-        item.gameObject.transform.position = (Vector2)(transform.position+transform.up)*2f;
+        item.gameObject.transform.position = transform.position+(transform.right*2f);
         item.GetComponent<Collider2D>().enabled = true;
         items.RemoveAt(index);
         UIUpdate();
