@@ -4,12 +4,17 @@ Shader "Unlit/PostProcessingFrag"
     {
         _Scale ("Scale", float) = 1
         _Offset ("Offset", Vector) = (0,0,0,0)
+        _Timer ("Timer", Float) = 0
     }
     SubShader
     {
         Tags { "RenderType"="Opaque" }
         LOD 100
 
+        // za warudo
+        
+
+        /*
         Pass
         {
             CGPROGRAM
@@ -66,7 +71,7 @@ Shader "Unlit/PostProcessingFrag"
             }
             ENDCG
         }
-
+        */
         Pass
         {
             //Blend One Zero
