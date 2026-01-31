@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class VendigoMask : ItemBaseClass
 {
-    public static event Action OnVendigoMaskUsed;
+    public static event Action OnVendigoMaskUsed, OnVendigoEndEffect;
     private void Start()
     {
         isPassive = true;
@@ -20,5 +20,18 @@ public class VendigoMask : ItemBaseClass
     protected override void Collect()
     {
         base.Collect();
+    }
+    protected override void Unequip()
+    {
+        OnVendigoEndEffect?.Invoke();
+        base.Unequip();
+    }
+    private void OnDisable()
+    {
+        OnVendigoEndEffect?.Invoke();
+    }
+    private void OnDestroy()
+    {
+        OnVendigoEndEffect?.Invoke();
     }
 }
