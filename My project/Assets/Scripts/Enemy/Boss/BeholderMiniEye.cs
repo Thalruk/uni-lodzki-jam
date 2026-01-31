@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BeholderMiniEye : MonoBehaviour
+public class BeholderMiniEye : MonoBehaviour, IDamaglable
 {
     [HideInInspector] public EnemyFieldOfView fow;
     [SerializeField] public Vector2 lookDir;
@@ -127,21 +127,7 @@ public class BeholderMiniEye : MonoBehaviour
             eyeVisual.position = transform.position + (Vector3)lookDir * offset;
         }
     }
-    public void Die()
-    {
-        isDead = true;
-        fireTimer = float.MaxValue;
-        GetComponent<SpriteRenderer>().sprite = closedEye;
-        eyeVisual.gameObject.SetActive(false);
-        if (fow != null) fow.enabled = false;
-        if (TryGetComponent<LineRenderer>(out var lr))
-        {
-            lr.startColor = Color.gray;
-            lr.endColor = Color.black;
-        }
 
-        // gray line renderer?
-    }
     public void Revive()
     {
         isDead = false;
@@ -156,4 +142,17 @@ public class BeholderMiniEye : MonoBehaviour
         }
     }
 
+    public void TakeDamage()
+    {
+        isDead = true;
+        fireTimer = float.MaxValue;
+        GetComponent<SpriteRenderer>().sprite = closedEye;
+        eyeVisual.gameObject.SetActive(false);
+        if (fow != null) fow.enabled = false;
+        if (TryGetComponent<LineRenderer>(out var lr))
+        {
+            lr.startColor = Color.gray;
+            lr.endColor = Color.black;
+        }
+    }
 }

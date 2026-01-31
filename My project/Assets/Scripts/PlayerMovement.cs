@@ -11,12 +11,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Vector2 movementDirection;
     [SerializeField] SpriteRenderer playerSpriteRenderer;
     [SerializeField] Sprite vendigoSprite, playerSprite;
-    [SerializeField] GameObject vendigoLeftHand, vendigoRigthHand, vendigoStateHands;
+    [SerializeField] GameObject vendigoStateHands;
+    [SerializeField] Animation vendigoLeftHand ,vendigoRigthHand;
     [SerializeField] bool canDash = true;
     [SerializeField] bool isDashing = false;
     [SerializeField] float dashPower;
     [SerializeField] float dashTime;
     [SerializeField] float dashCooldown;
+    [SerializeField] Animation playerAnimation;
     [SerializeField] List<Image> uiImagesOfMasks = new List<Image>();
     [SerializeField] List<Image> uiImagesOfMasksBG = new List<Image>();
     List<ItemBaseClass> items = new List<ItemBaseClass>();
@@ -28,14 +30,15 @@ public class PlayerMovement : MonoBehaviour
     float vertical;
     Rigidbody2D rb;
     HealthSystem health;
+   
     Color colorBase;
     public void AddItemToInventory(ItemBaseClass item)
     {
         if (items.Count < 3)
         {
             items.Add(item);
-            //uiImagesOfMasks[items.Count - 1].sprite = item.maskImage;
-            //uiImagesOfMasks[items.Count - 1].color = Color.white;
+            uiImagesOfMasks[items.Count - 1].sprite = item.maskImage;
+            uiImagesOfMasks[items.Count - 1].color = Color.white;
         }
         else
         {
@@ -44,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Awake()
     {
-        //colorBase = uiImagesOfMasksBG[0].color;
+        colorBase = uiImagesOfMasksBG[0].color;
         rb = GetComponent<Rigidbody2D>();
         _baseDashCooldown = dashCooldown;
         _baseSpeed = speed;
@@ -70,10 +73,17 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Dash());
         }
         HandelKeyInventoryDown();
-        //if (Time.timeScale == 0)
-        //{
+
         transform.position += (Vector3)movementDirection * speed * Time.unscaledDeltaTime;
-        //}
+        if(movementDirection != Vector2.zero)
+        {
+            playerAnimation.Play();
+        }
+        else
+        {
+            playerAnimation.Stop();
+            playerSpriteRenderer.sprite = playerSprite;
+        }
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
         transform.up = dir;
@@ -165,7 +175,7 @@ public class PlayerMovement : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
         {
             items[i].OnItemChange(i == index);
-            //uiImagesOfMasksBG[i].color = i == index ? new Color32(255, 60, 50, 100) : colorBase;
+            uiImagesOfMasksBG[i].color = i == index ? new Color32(255, 60, 50, 100) : colorBase;
 
         }
     }
@@ -197,11 +207,11 @@ public class PlayerMovement : MonoBehaviour
         vendigoLeftHandUsed = !vendigoLeftHandUsed;
         if (vendigoLeftHandUsed)
         {
-            vendigoLeftHand.GetComponent<Animation>().Play();
+            vendigoLeftHand.Play();
         }
         else
         {
-            vendigoRigthHand.GetComponent<Animation>().Play();
+            vendigoRigthHand.Play();
         }
     }
     void ResetVendigoState()

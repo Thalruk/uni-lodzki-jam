@@ -27,7 +27,7 @@ public class ItemBaseClass : MonoBehaviour, Interactable
         OnItemCollected?.Invoke(this);
         gameObject.transform.parent = player;
         gameObject.transform.position = trashPoint.position;
-        if (gameObject.TryGetComponent<Collider2D>(out Collider2D collider))
+        if (gameObject.TryGetComponent(out Collider2D collider))
         {
             collider.enabled = false;
         }

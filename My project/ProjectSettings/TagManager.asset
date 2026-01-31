@@ -8,6 +8,7 @@ TagManager:
   - PlayerGraphics
   - Obstacle
   - Track
+  - MiniEye
   layers:
   - Default
   - TransparentFX

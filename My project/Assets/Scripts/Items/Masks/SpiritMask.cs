@@ -16,7 +16,7 @@ public class SpiritMask : ItemBaseClass
     {
         camera.GetComponent<PostProcessVolume>().enabled = true;
         Time.timeScale = 0f;
-        camera.GetComponent<ZaWarudo>().enabled = true;
+        //camera.GetComponent<ZaWarudo>().enabled = true;
     }
     protected override void Unequip()
     {
