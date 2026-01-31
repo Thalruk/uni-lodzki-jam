@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         {
             items.Add(item);
             uiImagesOfMasks[items.Count - 1].sprite = item.maskImage;
-            uiImagesOfMasks[items.Count-1].color = Color.white;
+            uiImagesOfMasks[items.Count - 1].color = Color.white;
         }
         else
         {
@@ -182,13 +182,17 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = movementDirection * speed;
         }
+
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
+        transform.up = dir;
     }
 
     private void LateUpdate()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 dir = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
-        transform.up = dir;
+        //Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector2 dir = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
+        //transform.up = dir;
     }
     private IEnumerator Dash()
     {

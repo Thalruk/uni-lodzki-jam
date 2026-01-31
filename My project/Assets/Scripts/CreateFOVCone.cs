@@ -82,6 +82,7 @@ public class CreateFOVCone : MonoBehaviour
         }
     }
 
+
     private void LateUpdate()
     {
         playerViewDir = -transform.up;
