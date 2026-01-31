@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
-public class ItemBaseClass : MonoBehaviour, Interactable
+public class ItemBaseClass : MonoBehaviour, Interactable, IDragAndDropEvent
 {
     [SerializeField] protected float cooldown;
     public Sprite maskImage;

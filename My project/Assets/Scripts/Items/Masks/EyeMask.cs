@@ -37,7 +37,7 @@ public class EyeMask : ItemBaseClass
         print(target.name);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (target)
         {

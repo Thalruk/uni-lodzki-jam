@@ -598,9 +598,9 @@ MonoBehaviour:
   patrolPoints: []
   patrolPointHolder: {fileID: 0}
   baseSpeed: 0
-  enragedSpeedModifier: 0
+  enragedSpeedModifier: 0.2
   baseRotateSpeed: 0
-  enragedRotationSpeedModifier: 0
+  enragedRotationSpeedModifier: 0.2
   fow: {fileID: 0}
 --- !u!1 &410767900
 GameObject:
@@ -2620,6 +2620,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5456641978689389673, guid: fc602a8f1145e544c801cb221c743d50, type: 3}
+      propertyPath: uiImagesOfMasksBG.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5456641978689389673, guid: fc602a8f1145e544c801cb221c743d50, type: 3}
       propertyPath: uiImagesOfMasks.Array.data[0]
       value: 
       objectReference: {fileID: 1120991925}
@@ -2631,6 +2635,18 @@ PrefabInstance:
       propertyPath: uiImagesOfMasks.Array.data[2]
       value: 
       objectReference: {fileID: 1776092478}
+    - target: {fileID: 5456641978689389673, guid: fc602a8f1145e544c801cb221c743d50, type: 3}
+      propertyPath: uiImagesOfMasksBG.Array.data[0]
+      value: 
+      objectReference: {fileID: 1763106}
+    - target: {fileID: 5456641978689389673, guid: fc602a8f1145e544c801cb221c743d50, type: 3}
+      propertyPath: uiImagesOfMasksBG.Array.data[1]
+      value: 
+      objectReference: {fileID: 1805877097}
+    - target: {fileID: 5456641978689389673, guid: fc602a8f1145e544c801cb221c743d50, type: 3}
+      propertyPath: uiImagesOfMasksBG.Array.data[2]
+      value: 
+      objectReference: {fileID: 1110308342}
     - target: {fileID: 5614146174638423921, guid: fc602a8f1145e544c801cb221c743d50, type: 3}
       propertyPath: m_IsActive
       value: 0

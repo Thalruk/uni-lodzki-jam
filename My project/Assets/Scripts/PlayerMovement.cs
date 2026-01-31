@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashTime;
     [SerializeField] float dashCooldown;
     [SerializeField] List<Image> uiImagesOfMasks = new List<Image>();
+    [SerializeField] List<Image> uiImagesOfMasksBG = new List<Image>();
     List<ItemBaseClass> items = new List<ItemBaseClass>();
     private float _baseDashCooldown, _baseSpeed;
     public static bool isItemsFull = false;
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontal;
     float vertical;
     Rigidbody2D rb;
+    Color colorBase;
     public void AddItemToInventory(ItemBaseClass item)
     {
         if (items.Count < 3)
@@ -41,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Awake()
     {
+        colorBase = uiImagesOfMasksBG[0].color;
         rb = GetComponent<Rigidbody2D>();
         _baseDashCooldown = dashCooldown;
         _baseSpeed = speed;
@@ -93,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
         {
             EquipItem(0);
             equippedItemIndex = 0;
+            
             if (items[equippedItemIndex].isPassive)
             {
                 items[equippedItemIndex].Interact();
@@ -127,6 +131,8 @@ public class PlayerMovement : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
         {
             items[i].OnItemChange(i == index);
+            uiImagesOfMasksBG[i].color = i == index ? new Color32(255, 60, 50,100) : colorBase;
+
         }
     }
     #region FoxMaskLogic
