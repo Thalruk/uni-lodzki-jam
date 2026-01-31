@@ -8,9 +8,11 @@ public class PlayerMovement : MonoBehaviour
   
     float horizontal;
     float vertical;
-    [SerializeField] Vector2 movementDirection;
     Rigidbody2D rb;
     List<ItemBaseClass> items = new List<ItemBaseClass>();
+    [SerializeField] Vector2 movementDirection;
+    [SerializeField] SpriteRenderer playerSpriteRenderer;
+    [SerializeField] Sprite vendigoSprite, playerSprite;
     [SerializeField] bool canDash = true;
     [SerializeField] bool isDashing = false;
     [SerializeField] float dashPower;
@@ -116,6 +118,12 @@ public class PlayerMovement : MonoBehaviour
     {
         dashCooldown = dashCooldownValue;
         speed = speedValue;
+    }
+    #endregion
+    #region VendigoMaskLogic
+    void VendigoMaksUsed()
+    {
+        playerSpriteRenderer.sprite = vendigoSprite;
     }
     #endregion
     private void FixedUpdate()
