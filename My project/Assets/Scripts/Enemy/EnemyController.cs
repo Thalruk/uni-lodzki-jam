@@ -87,7 +87,6 @@ public class EnemyController : MonoBehaviour, IDamaglable
                 actualPatrolPoint = (actualPatrolPoint + 1) % patrolPoints.Count;
             }
         }
-        print("REseting");
         caughtByPlayer = false;
     }
 

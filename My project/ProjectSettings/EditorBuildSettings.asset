@@ -6,12 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/MakarCopy.unity
-    guid: 800aab437e1bdfe45b7754395eaae7d3
-  - enabled: 1
-    path: Assets/Scenes/Level1.unity
-    guid: cb53ed2e40c1ff645bf5b5f1dae1a9a4
+    path: Assets/Scenes/Level1.1.unity
+    guid: 095f51ebe66b1324da1a38917c45b635
   m_configObjects: {}
