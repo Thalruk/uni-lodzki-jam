@@ -150,6 +150,6 @@ public class EnemyController : MonoBehaviour, IDamaglable
 
     public void TakeDamage()
     {
-        healthSystem.ChangeHealth(1);
+        healthSystem.ChangeHealth(-1);
     }
 }
