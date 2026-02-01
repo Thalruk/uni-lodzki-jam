@@ -82,6 +82,7 @@ Shader "Unlit/PostProcessingFrag"
 
             sampler2D _SourceTex;
             sampler2D _ScreenMaskTexture;
+            float _Ambient;
             struct appdata
             {
                 float4 vertex : POSITION;
@@ -102,7 +103,7 @@ Shader "Unlit/PostProcessingFrag"
             fixed4 frag (v2f i) : SV_Target
             {
                 //return float4(i.uv, 0, 1);
-                return tex2D(_SourceTex, i.uv) * (tex2D(_ScreenMaskTexture, i.uv).r + 0.1);
+                return tex2D(_SourceTex, i.uv) * (tex2D(_ScreenMaskTexture, i.uv).r + _Ambient);
                 //return tex2D(_ScreenMaskTexture, i.uv).r;
             }
             ENDCG

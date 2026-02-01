@@ -6,6 +6,10 @@ public class FovConeVisualization : MonoBehaviour
 
     [SerializeField] Material material;
 
+    private void Start()
+    {
+        material.SetFloat("_Ambient", 0.1f);
+    }
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
         material.SetTexture("_SourceTex", source);
