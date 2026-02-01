@@ -8,8 +8,13 @@ public class BowPart : ItemBaseClass
     [SerializeField] TextMeshProUGUI partsUI;
     protected override void Collect()
     {
-        BowCollector.CollectPart();
-        partsUI.text = BowCollector.bowParts.ToString() + "/ 3"; 
-        Destroy(gameObject);
+        if (BowCollector.bowParts <= 1 ||!PlayerMovement.isItemsFull)
+        {
+            print(PlayerMovement.isItemsFull);
+            BowCollector.CollectPart();
+            partsUI.text = BowCollector.bowParts.ToString() + "/ 3";
+            Destroy(gameObject);
+        }
+
     }
 }
