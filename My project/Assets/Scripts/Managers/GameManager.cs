@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject loseMenu, winMenu;
+    [SerializeField] GameObject loseMenu, winMenu, startMenu;
     private void Start()
     {
         PlayerMovement.OnPlayerDeath += OnLose;
@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         winMenu.SetActive(true);
+    }
+    public void StartGame()
+    {
+        Time.timeScale = 1f;
+        startMenu.SetActive(false);
     }
     void OnLose()
     {
