@@ -2724,7 +2724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5838691740449247688, guid: da43773b593ee02409981b6402ca02aa, type: 3}
       propertyPath: baseSpeed
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5838691740449247688, guid: da43773b593ee02409981b6402ca02aa, type: 3}
       propertyPath: baseRotateSpeed
@@ -2761,10 +2761,6 @@ PrefabInstance:
     - target: {fileID: 8639947461639459912, guid: da43773b593ee02409981b6402ca02aa, type: 3}
       propertyPath: m_Name
       value: Enemy3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8639947461639459912, guid: da43773b593ee02409981b6402ca02aa, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3149,8 +3145,7 @@ PrefabInstance:
       propertyPath: uiImagesOfMasksBG.Array.data[5]
       value: 
       objectReference: {fileID: 1301259967}
-    m_RemovedComponents:
-    - {fileID: 8587709310374416165, guid: 7c2d922a8c0589245b195a65ae57a7b9, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3617,11 +3612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5838691740449247688, guid: da43773b593ee02409981b6402ca02aa, type: 3}
       propertyPath: baseSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5838691740449247688, guid: da43773b593ee02409981b6402ca02aa, type: 3}
-      propertyPath: m_Enabled
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5838691740449247688, guid: da43773b593ee02409981b6402ca02aa, type: 3}
       propertyPath: patrolPointHolder
@@ -3650,10 +3641,6 @@ PrefabInstance:
     - target: {fileID: 8639947461639459912, guid: da43773b593ee02409981b6402ca02aa, type: 3}
       propertyPath: m_Name
       value: Enemy4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8639947461639459912, guid: da43773b593ee02409981b6402ca02aa, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
