@@ -13,7 +13,7 @@ public class BowPart : MonoBehaviour
             if (BowCollector.bowParts < 2 || !PlayerMovement.isItemsFull)
             {
                 BowCollector.CollectPart();
-                partsUI.text = BowCollector.bowParts.ToString() + "/ 3";
+                partsUI.text = BowCollector.bowParts.ToString() + " / 3";
                 Destroy(gameObject);
             }
             else if (PlayerMovement.isItemsFull && BowCollector.bowParts > 2)

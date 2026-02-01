@@ -624,7 +624,8 @@ MonoBehaviour:
   dashTime: 1
   dashCooldown: 6
   stepSounds: []
-  playerAnimation: {fileID: 0}
+  playerAnimation:
+  - {fileID: 0}
   uiImagesOfMasks:
   - {fileID: 0}
   - {fileID: 0}

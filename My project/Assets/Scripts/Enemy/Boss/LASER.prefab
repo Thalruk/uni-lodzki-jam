@@ -49,6 +49,15 @@ MonoBehaviour:
   laserDuration: 1
   thinWidth: 0.05
   thickWidth: 3
+  maxDistance: 30
+  damage: 1
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 64
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  damageTickRate: 1
 --- !u!120 &5857132206831272057
 LineRenderer:
   serializedVersion: 2
@@ -70,7 +79,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 250560512cbd5794191f95dfb2c3ee6e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
