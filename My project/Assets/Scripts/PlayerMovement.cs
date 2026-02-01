@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(HealthSystem), typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    public static Action OnPlayerDeath;
     public static bool isItemsFull = false;
     public HealthSystem health;
     public AudioSource playerSounds;
@@ -69,13 +71,19 @@ public class PlayerMovement : MonoBehaviour
         playerSpriteRenderer.sprite = playerSprite;
         health = GetComponent<HealthSystem>();
         health.SetStartingHealth(10);
+
         #region Subscriptions 
         FoxMask.OnFoxMaskUsed += FoxMaskUsed;
         ItemBaseClass.OnItemCollected += AddItemToInventory;
         FoxMask.OnFoxMaskEndEffect += ResetMovementToBasic;
         VendigoMask.OnVendigoMaskUsed += VendigoMaksUsed;
         VendigoMask.OnVendigoEndEffect += ResetVendigoState;
+        health.OnDie += Die;
         #endregion
+    }
+    void Die()
+    {
+        OnPlayerDeath?.Invoke();
     }
     private void Update()
     {
@@ -287,6 +295,7 @@ public class PlayerMovement : MonoBehaviour
         FoxMask.OnFoxMaskEndEffect -= ResetMovementToBasic;
         VendigoMask.OnVendigoMaskUsed -= VendigoMaksUsed;
         VendigoMask.OnVendigoEndEffect -= ResetVendigoState;
+        health.OnDie -= Die;
     }
     private void OnDestroy()
     {
@@ -295,5 +304,6 @@ public class PlayerMovement : MonoBehaviour
         FoxMask.OnFoxMaskEndEffect -= ResetMovementToBasic;
         VendigoMask.OnVendigoMaskUsed -= VendigoMaksUsed;
         VendigoMask.OnVendigoEndEffect -= ResetVendigoState;
+        health.OnDie -= Die;
     }
 }
