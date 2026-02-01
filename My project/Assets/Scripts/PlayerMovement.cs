@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         _baseSpeed = speed;
         playerSpriteRenderer.sprite = playerSprite;
         health = GetComponent<HealthSystem>();
-        health.SetStartingHealth(10);
+        health.SetStartingHealth(1);
 
         #region Subscriptions 
         FoxMask.OnFoxMaskUsed += FoxMaskUsed;
