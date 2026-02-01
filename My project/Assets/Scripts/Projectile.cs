@@ -5,6 +5,11 @@ public class Projectile : MonoBehaviour
     public int damage;
     public int speed;
 
+    private void Awake()
+    {
+        Destroy(gameObject, 7);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -12,33 +17,12 @@ public class Projectile : MonoBehaviour
             if (collision.gameObject.TryGetComponent(out HealthSystem healthSystem))
             {
                 healthSystem.ChangeHealth(-damage);
-                Deactivate();
+                Destroy(gameObject);
             }
         }
-        else if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Obstacle"))
         {
-            Deactivate();
+            Destroy(gameObject);
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Deactivate();
-    }
-
-    private void OnEnable()
-    {
-        Invoke(nameof(Deactivate), 5f);
-    }
-
-    void Deactivate()
-    {
-        CancelInvoke();
-        gameObject.SetActive(false);
-    }
-
-    private void OnDisable()
-    {
-        CancelInvoke();
     }
 }

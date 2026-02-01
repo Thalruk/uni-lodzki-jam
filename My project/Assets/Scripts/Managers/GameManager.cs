@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(index);
     }
-
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip clickSound;
     [SerializeField] private float delayBeforeLoad = 0.05f;

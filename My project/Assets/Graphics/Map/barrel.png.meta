@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b21781ddee3014f4fb3f14781d82fef0
+guid: f7484434bece51c49abc0007c2699104
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,22 +34,22 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 250
-  spriteBorder: {x: 544, y: 533, z: 493, w: 437}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -93,32 +93,27 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites: []
     outline: []
     physicsShape:
-    - - {x: 90.177734, y: -337}
-      - {x: -694, y: -337}
-      - {x: -693.99994, y: 12.221619}
-      - {x: -694, y: 406}
-      - {x: 68.646484, y: 406}
-      - {x: 745, y: 406}
-      - {x: 745, y: 34.500244}
-      - {x: 745, y: -337}
+    - - {x: -128.5, y: -287.5}
+      - {x: -238.5, y: -200.5}
+      - {x: -295.5, y: -105.5}
+      - {x: -314.5, y: 7.5}
+      - {x: -287.5, y: 130.5}
+      - {x: -231.5, y: 213.5}
+      - {x: -115.5, y: 300.5}
+      - {x: 11.5, y: 320.5}
+      - {x: 133.5, y: 294.5}
+      - {x: 220.5, y: 235.5}
+      - {x: 293.5, y: 125.5}
+      - {x: 304.5, y: 5.5}
+      - {x: 289.5, y: -119.5}
+      - {x: 219.5, y: -224.5}
+      - {x: 136.5, y: -276.5}
+      - {x: 17.5, y: -309.5}
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 1537655665
