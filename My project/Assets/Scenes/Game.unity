@@ -504,7 +504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8639947461639459912, guid: da43773b593ee02409981b6402ca02aa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -659,6 +659,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3229991662563707664, guid: da43773b593ee02409981b6402ca02aa, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229991662563707664, guid: da43773b593ee02409981b6402ca02aa, type: 3}
+      propertyPath: m_EdgeRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229991662563707664, guid: da43773b593ee02409981b6402ca02aa, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229991662563707664, guid: da43773b593ee02409981b6402ca02aa, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229991662563707664, guid: da43773b593ee02409981b6402ca02aa, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3229991662563707664, guid: da43773b593ee02409981b6402ca02aa, type: 3}
+      propertyPath: m_LayerOverridePriority
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5838691740449247688, guid: da43773b593ee02409981b6402ca02aa, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -705,7 +729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8639947461639459912, guid: da43773b593ee02409981b6402ca02aa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1004,6 +1028,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3755822443712306417, guid: da43773b593ee02409981b6402ca02aa, type: 3}
+      propertyPath: m_ContactCaptureLayers.m_Bits
+      value: 3575
+      objectReference: {fileID: 0}
     - target: {fileID: 5838691740449247688, guid: da43773b593ee02409981b6402ca02aa, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1050,7 +1078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8639947461639459912, guid: da43773b593ee02409981b6402ca02aa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1422,11 +1450,11 @@ PrefabInstance:
       objectReference: {fileID: 2011154885}
     - target: {fileID: 8164216245927778134, guid: 7c2d922a8c0589245b195a65ae57a7b9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.421303
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 8164216245927778134, guid: 7c2d922a8c0589245b195a65ae57a7b9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -17.696383
+      value: -15.39
       objectReference: {fileID: 0}
     - target: {fileID: 8164216245927778134, guid: 7c2d922a8c0589245b195a65ae57a7b9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1635,7 +1663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8639947461639459912, guid: da43773b593ee02409981b6402ca02aa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1959,7 +1987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8639947461639459912, guid: da43773b593ee02409981b6402ca02aa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

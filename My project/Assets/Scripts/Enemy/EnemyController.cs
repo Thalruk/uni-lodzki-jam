@@ -145,6 +145,8 @@ public class EnemyController : MonoBehaviour, IDamaglable
 
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, targetAngle), baseRotateSpeed * Time.fixedDeltaTime);
+        transform.GetChild(transform.childCount - 1).GetComponent<Transform>().position = transform.position;
+        transform.GetChild(transform.childCount - 1).GetComponent<Transform>().transform.localRotation = transform.rotation;
     }
 
     public void TakeDamage()

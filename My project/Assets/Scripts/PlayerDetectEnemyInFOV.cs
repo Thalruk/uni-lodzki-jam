@@ -42,7 +42,6 @@ public class PlayerDetectEnemyInFOV : MonoBehaviour
     private void LateUpdate()
     {
         playerViewDir = -transform.up;
-
         foreach (BoxCollider2D enemy in enemies)
         {
             Vector2 point = enemy.bounds.ClosestPoint(transform.position);
