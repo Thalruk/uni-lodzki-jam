@@ -16,9 +16,8 @@ public class PlayerDetectEnemyInFOV : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("EnemyCollider"))
         {
-            print("AddingEnemy");
             BoxCollider2D enemyCollider = collision.GetComponent<BoxCollider2D>();
             if (enemyCollider != null && !enemies.Contains(enemyCollider))
             {
@@ -29,7 +28,7 @@ public class PlayerDetectEnemyInFOV : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("EnemyCollider"))
         {
             BoxCollider2D enemyCollider = collision.GetComponent<BoxCollider2D>();
             if (enemyCollider != null && enemies.Contains(enemyCollider))
@@ -58,13 +57,14 @@ public class PlayerDetectEnemyInFOV : MonoBehaviour
 
             RaycastHit2D hit2D = Physics2D.Raycast(transform.position, toEnemy, dist, enemyLayer);
             Debug.DrawLine(transform.position, hit2D.point, UnityEngine.Color.green);
-            if (hit2D.collider != null && hit2D.collider.CompareTag("Enemy") && !transform.parent)
+            if (hit2D.collider != null && hit2D.collider.CompareTag("EnemyCollider"))
             {
-                EnemyController enemyController = hit2D.collider.gameObject.GetComponent<EnemyController>();
+                EnemyController enemyController = hit2D.collider.gameObject.transform.parent.GetComponent<EnemyController>();
                 if (!enemyController.caughtByPlayer)
                 {
+                    print("Hitted");
                     enemyController.caughtByPlayer = true;
-                    break;
+                    continue;
                 }
             }
 

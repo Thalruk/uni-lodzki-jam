@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 8917753893017156312}
   m_Layer: 8
   m_Name: EnemyCollision
-  m_TagString: Enemy
+  m_TagString: EnemyCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 4481486667505723176}
   - component: {fileID: 3310838545259968713}
   - component: {fileID: 581536241617882265}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

@@ -87,6 +87,7 @@ public class EnemyController : MonoBehaviour, IDamaglable
                 actualPatrolPoint = (actualPatrolPoint + 1) % patrolPoints.Count;
             }
         }
+        print("REseting");
         caughtByPlayer = false;
     }
 
@@ -147,6 +148,7 @@ public class EnemyController : MonoBehaviour, IDamaglable
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, targetAngle), baseRotateSpeed * Time.fixedDeltaTime);
         transform.GetChild(transform.childCount - 1).GetComponent<Transform>().position = transform.position;
         transform.GetChild(transform.childCount - 1).GetComponent<Transform>().transform.localRotation = transform.rotation;
+        //caughtByPlayer = false;
     }
 
     public void TakeDamage()

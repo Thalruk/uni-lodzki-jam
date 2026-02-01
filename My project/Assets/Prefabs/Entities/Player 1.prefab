@@ -57,6 +57,8 @@ MonoBehaviour:
   health: {fileID: 0}
   playerSounds: {fileID: 8112645255550874368}
   speed: 5
+  foxMaskDashCooldownMultiplayer: 0
+  foxMaskSpeedMultiplayer: 0
   movementDirection: {x: 0, y: 0}
   warningTXT: {fileID: 0}
   playerSpriteRenderer: {fileID: 6149665786262571141}
@@ -853,7 +855,7 @@ GameObject:
   - component: {fileID: 8587709310374416165}
   m_Layer: 0
   m_Name: EnemyInFOVDetector
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
