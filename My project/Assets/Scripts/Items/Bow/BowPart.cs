@@ -16,7 +16,7 @@ public class BowPart : MonoBehaviour
                 partsUI.text = BowCollector.bowParts.ToString() + "/ 3";
                 Destroy(gameObject);
             }
-            else if (PlayerMovement.isItemsFull)
+            else if (PlayerMovement.isItemsFull && BowCollector.bowParts > 2)
             {
                 collision.GetComponent<PlayerMovement>().ShowWarningTXT();
             }
