@@ -391,6 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loseMenu: {fileID: 0}
   winMenu: {fileID: 0}
+  startMenu: {fileID: 0}
   audioSource: {fileID: 151117881}
   clickSound: {fileID: 8300000, guid: 6dba4957f71fd8d40a5c6db214bfdd63, type: 3}
   delayBeforeLoad: 0.7
@@ -2019,8 +2020,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b1806a230a5fd42b0ca58f339470c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 0
-  eye: {fileID: 768839721}
+  offset: 15
+  deadzone: 5
+  smoothSpeed: 10
+  pupil: {fileID: 768839721}
+  bodyAnchor: {fileID: 0}
+  pointsPerUnit: 2
+  waveSpeed: 3
+  waveStrength: 0.4
+  waveFrequency: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -63,28 +63,24 @@ public class BeholderMiniEye : MonoBehaviour, IDamaglable
         }
     }
     public void SetFireRate(float newRate) => fireRate = newRate;
+
     void Shoot(Transform target = null)
     {
         if (projectiles.Count == 0) return;
 
         Projectile bulletPrefab = projectiles[Random.Range(0, projectiles.Count)];
-        Projectile bullet = Instantiate(bulletPrefab.gameObject, eyeVisual.position, transform.rotation).GetComponent<Projectile>();
+        GameObject bulletObj = ObjectPool.Instance.GetPooledObject(bulletPrefab.gameObject);
 
-        Vector2 shootDirection;
+        if (bulletObj == null) return;
 
-        if (target != null || (fow.playerInView && fow.player != null))
-        {
-            Vector3 targetPos = target != null ? target.position : fow.player.transform.position;
+        bulletObj.transform.position = eyeVisual.position;
+        bulletObj.SetActive(true);
 
-            Vector3 randomSpread = (Vector3)Random.insideUnitCircle * shootOffset;
-            Vector3 finalTarget = targetPos + randomSpread;
+        Projectile bullet = bulletObj.GetComponent<Projectile>();
 
-            shootDirection = (finalTarget - eyeVisual.position).normalized;
-        }
-        else
-        {
-            shootDirection = transform.right;
-        }
+        Vector3 targetPos = (target != null) ? target.position : (fow.player != null ? fow.player.transform.position : transform.position + transform.right);
+        Vector3 finalTarget = targetPos + (Vector3)Random.insideUnitCircle * shootOffset;
+        Vector2 shootDirection = (finalTarget - eyeVisual.position).normalized;
 
         float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
         bullet.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
