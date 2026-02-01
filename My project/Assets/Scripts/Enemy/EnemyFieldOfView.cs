@@ -35,7 +35,36 @@ public class EnemyFieldOfView : MonoBehaviour
             player = collision.GetComponent<PlayerMovement>();
         }
     }
+    /*
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if (player == null)
+                player = collision.GetComponent<PlayerMovement>();
+            EnemyController enemyController = transform.parent.GetComponent<EnemyController>();
+            Vector2 dirFromPlayerView = (-player.transform.up).normalized;
+            float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+            Vector2 dirFromPlayer = (transform.position - player.transform.position).normalized;
 
+            float angleToPlayer = Vector2.SignedAngle(dirFromPlayerView, dirFromPlayer);
+            CreateFOVCone fovCone = player.transform.GetComponentInChildren<CreateFOVCone>();
+            print(angleToPlayer);
+            if (!enemyController.caughtByPlayer &&
+                Mathf.Abs(angleToPlayer) <= fovCone.playerFOV * 0.5f &&
+                distanceToPlayer <= fovCone.viewRange)
+            {
+                print("Enemy freez");
+                enemyController.caughtByPlayer = true;
+            }
+            else if (enemyController.caughtByPlayer)
+            {
+                print("Enemy unfreez");
+                enemyController.caughtByPlayer = false;
+            }
+        }
+    }
+    */
     private void Update()
     {
         playerInView = false;

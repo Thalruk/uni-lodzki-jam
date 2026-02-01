@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 public class SpiritMask : ItemBaseClass
 {
     GameObject camera;
@@ -10,11 +9,11 @@ public class SpiritMask : ItemBaseClass
         useDuration = 8f;
         cooldown = useDuration + cooldown;
         camera = FindAnyObjectByType<Camera>().gameObject;
-        camera.GetComponent<PostProcessVolume>().enabled = false;
+        //camera.GetComponent<PostProcessVolume>().enabled = false;
     }
     protected override void Use()
     {
-        camera.GetComponent<PostProcessVolume>().enabled = true;
+        //camera.GetComponent<PostProcessVolume>().enabled = true;
         Time.timeScale = 0f;
         //camera.GetComponent<ZaWarudo>().enabled = true;
     }
@@ -26,7 +25,7 @@ public class SpiritMask : ItemBaseClass
 
     private void UnequipRest()
     {
-        camera.GetComponent<PostProcessVolume>().enabled = false;
+        //camera.GetComponent<PostProcessVolume>().enabled = false;
         Time.timeScale = 1f;
         base.Unequip();
         camera.GetComponent<ZaWarudo>().enabled = false;
