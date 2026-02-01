@@ -48,6 +48,12 @@ public class PlayerMovement : MonoBehaviour
             Invoker.InvokeDelayed(ClearWarningTXT, 6f);
         }
     }
+
+    public void ShowWarningTXT()
+    {
+        warningTXT.text = "Your inventory is full. To free place choose item and press \"G\"";
+        Invoker.InvokeDelayed(ClearWarningTXT, 6f);
+    }
     void ClearWarningTXT()
     {
         warningTXT.text = string.Empty;

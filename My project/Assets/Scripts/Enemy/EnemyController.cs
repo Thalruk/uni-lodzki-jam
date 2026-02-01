@@ -108,7 +108,6 @@ public class EnemyController : MonoBehaviour, IDamaglable
 
             // Attack
             float dist = Vector2.Distance(transform.position, targetPos);
-            print(dist);
             if (dist < 7f)
             {
                 spriteRenderer.sprite = sprites[1];
