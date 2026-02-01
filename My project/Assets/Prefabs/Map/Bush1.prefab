@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4551230940644345586}
   - component: {fileID: 5355426232878419825}
   - component: {fileID: 2421370605306484075}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Bush1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 48cac956a8684164a93774e29d09c616, type: 2}
-  visibility: 0.7
+  visibility: 0.5
 --- !u!60 &2421370605306484075
 PolygonCollider2D:
   m_ObjectHideFlags: 0

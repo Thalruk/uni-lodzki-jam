@@ -23,7 +23,7 @@ public class CreateFOVCone : MonoBehaviour
     float rayCastRange;
     [Range(0.1f, 120f)]
     [SerializeField] public float playerFOV = 90f;
-    [Range(0.001f, 0.1f)]
+    [Range(0.001f, 1f)]
     [SerializeField] float epsilon = 0.01f;
 
     // MeshVariables
