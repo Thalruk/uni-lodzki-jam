@@ -72,6 +72,7 @@ public class EnemyController : MonoBehaviour
                 actualPatrolPoint = (actualPatrolPoint + 1) % patrolPoints.Count;
             }
         }
+        caughtByPlayer = false;
     }
 
     private void FixedUpdate()
