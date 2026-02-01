@@ -49,7 +49,7 @@ MonoBehaviour:
   laserDuration: 1
   thinWidth: 0.05
   thickWidth: 3
-  maxDistance: 30
+  maxDistance: 50
   damage: 1
   obstacleMask:
     serializedVersion: 2
