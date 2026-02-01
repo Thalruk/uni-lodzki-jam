@@ -47,9 +47,10 @@ Shader "Sprites/TransparencyWhenPlayer"
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
                 float2 ViewPos : TEXCOORD1;
+                float2 screenPos : TEXCOORD2;
             };
 
-            sampler2D _MainTex, _AlphaTex;
+            sampler2D _MainTex, _AlphaTex, _ScreenMaskTexture;
             float4 _MainTex_ST;
 
             float _Visibility;
@@ -60,6 +61,10 @@ Shader "Sprites/TransparencyWhenPlayer"
                 o.uv = v.uv;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.ViewPos = UnityObjectToViewPos(v.vertex).xy;
+                o.screenPos = o.vertex.xyz / o.vertex.w;
+                float2 screenUV = o.screenPos.xy * 0.5 + 0.5;
+                screenUV.y = 1.0 - screenUV.y;
+                o.screenPos = screenUV;
                 return o;
             }
 
@@ -73,6 +78,10 @@ Shader "Sprites/TransparencyWhenPlayer"
                 float distToPlayer = length(i.ViewPos);
                 transparency = saturate(lerp(0, 1, distToPlayer * _Visibility));
                 transparency *= tex2D(_MainTex, i.uv).a;
+                transparency = saturate(transparency);
+
+                float masked = tex2D(_ScreenMaskTexture, i.screenPos).r;
+                transparency -= masked * _Visibility;
                 transparency = saturate(transparency);
                 //return float4(distToPlayer, 0, 0, 1);
                 //return float4(transparency, transparency, transparency, transparency);

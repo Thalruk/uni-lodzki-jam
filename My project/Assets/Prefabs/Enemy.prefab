@@ -271,8 +271,8 @@ MonoBehaviour:
   patrolPointHolder: {fileID: 889043604243093009}
   baseSpeed: 7
   enragedSpeedModifier: 1.5
-  baseRotateSpeed: 120
-  enragedRotationSpeedModifier: 0.75
+  baseRotateSpeed: 360
+  enragedRotationSpeedModifier: 0.3
   fow: {fileID: 1726415173057213207}
   caughtByPlayer: 0
   sprites:
