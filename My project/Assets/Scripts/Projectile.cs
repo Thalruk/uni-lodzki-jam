@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
 
     private void Awake()
     {
-        Destroy(gameObject, 2);
+        Destroy(gameObject, 7);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,6 +19,10 @@ public class Projectile : MonoBehaviour
                 healthSystem.ChangeHealth(-damage);
                 Destroy(gameObject);
             }
+        }
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject);
         }
     }
 }
