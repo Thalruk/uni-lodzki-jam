@@ -29,6 +29,6 @@ public class Bonfire : MonoBehaviour
         scale += Mathf.Sin(t * 2 + 145) * 0.5f;
         scale += Mathf.Sin(t * 3 + 984) * 0.3f;
 
-        fire.transform.localScale = baseScale + Vector3.one * scale * 5f;
+        fire.transform.localScale = Vector3.Max(baseScale + Vector3.one * scale * 5f, baseScale);
     }
 }

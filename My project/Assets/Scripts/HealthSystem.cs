@@ -28,7 +28,6 @@ public class HealthSystem : MonoBehaviour
             return;
         currentIntensity = Mathf.Lerp(currentIntensity, vignetteIntensity, 0.1f);
         vignette.intensity.value = currentIntensity;
-        print(vignetteIntensity);
     }
     public void SetStartingHealth(int value)
     {
