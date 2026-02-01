@@ -62,7 +62,6 @@ public class PlayerDetectEnemyInFOV : MonoBehaviour
                 EnemyController enemyController = hit2D.collider.gameObject.transform.parent.GetComponent<EnemyController>();
                 if (!enemyController.caughtByPlayer)
                 {
-                    print("Hitted");
                     enemyController.caughtByPlayer = true;
                     continue;
                 }
