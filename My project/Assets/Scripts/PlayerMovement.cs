@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] SpriteRenderer playerSpriteRenderer;
     [SerializeField] Sprite vendigoSprite, playerSprite;
     [SerializeField] GameObject vendigoStateHands;
-    [SerializeField] Animation vendigoLeftHand ,vendigoRigthHand;
+    [SerializeField] Animation vendigoLeftHand, vendigoRigthHand;
     [SerializeField] bool canDash = true;
     [SerializeField] bool isDashing = false;
     [SerializeField] float dashPower;
@@ -31,11 +31,11 @@ public class PlayerMovement : MonoBehaviour
     bool VendigoState = false, vendigoLeftHandUsed;
     float horizontal;
     float vertical;
-    Rigidbody2D rb;   
+    Rigidbody2D rb;
     Color colorBase;
     public void AddItemToInventory(ItemBaseClass item)
     {
-        if (items.Count >= 3)
+        if (items.Count <= 3)
         {
             items.Add(item);
             uiImagesOfMasks[items.Count - 1].sprite = item.maskImage;
@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isItemsFull = true;
             warningTXT.text = "Your inventory is full. To free place choose item and press \"G\"";
-            Invoker.InvokeDelayed(ClearWarningTXT,6f);
+            Invoker.InvokeDelayed(ClearWarningTXT, 6f);
         }
     }
     void ClearWarningTXT()
@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
         HandelKeyInventoryDown();
 
         transform.position += (Vector3)movementDirection * speed * Time.unscaledDeltaTime;
-        if(movementDirection != Vector2.zero)
+        if (movementDirection != Vector2.zero)
         {
             playerAnimation.Play();
         }

@@ -18,7 +18,7 @@ public class CreateFOVCone : MonoBehaviour
 
     // TODO: ustawic prawidlowo kierunek widzenia gracza, zasieg i kat widzenia
     Vector2 playerViewDir = Vector2.right;
-    [Range(0.1f, 20f)]
+    [Range(0.1f, 50f)]
     [SerializeField] public float viewRange = 8f;
     float rayCastRange;
     [Range(0.1f, 120f)]

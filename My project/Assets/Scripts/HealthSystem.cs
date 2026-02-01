@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,9 +11,9 @@ public class HealthSystem : MonoBehaviour
     public void SetStartingHealth(int value)
     {
         health = value;
-        if(grid != null && healthImage)
+        if (grid && healthImage)
         {
-            for(int i = 0; i < health; i++)
+            for (int i = 0; i < health; i++)
             {
                 Instantiate(healthImage, grid.transform);
             }
@@ -24,7 +22,7 @@ public class HealthSystem : MonoBehaviour
     }
     void UpdateHealth(int value)
     {
-        if(grid==null)return;
+        if (grid == null) return;
         switch (Mathf.Sign(value))
         {
             case 1:
