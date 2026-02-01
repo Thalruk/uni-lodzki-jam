@@ -6,6 +6,8 @@ using UnityEngine;
 public class VendigoMask : ItemBaseClass
 {
     public static event Action OnVendigoMaskUsed, OnVendigoEndEffect;
+    [SerializeField] AudioSource sound;
+    [SerializeField] AudioClip clip;
     private void Start()
     {
         isPassive = true;
@@ -15,6 +17,7 @@ public class VendigoMask : ItemBaseClass
     }
     protected override void Use()
     {
+        sound.PlayOneShot(clip);
         OnVendigoMaskUsed?.Invoke();
     }
     protected override void Collect()

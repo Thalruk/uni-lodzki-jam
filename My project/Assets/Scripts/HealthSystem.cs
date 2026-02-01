@@ -9,6 +9,8 @@ public class HealthSystem : MonoBehaviour
     int health;
     [SerializeField] GameObject grid;
     [SerializeField] Image healthImage;
+    [SerializeField] AudioSource sound;
+    [SerializeField] AudioClip clip;
 
     Camera cam;
     Vignette vignette;
@@ -58,6 +60,7 @@ public class HealthSystem : MonoBehaviour
 
                 break;
             case -1:
+                sound.PlayOneShot(clip);
                 Destroy(grid.transform.GetChild(0).gameObject);
                 if (health <= 3)
                 {
