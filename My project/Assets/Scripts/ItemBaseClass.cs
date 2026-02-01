@@ -23,8 +23,12 @@ public class ItemBaseClass : MonoBehaviour, Interactable
 
     protected virtual void Collect()
     {
+        if (PlayerMovement.isItemsFull) 
+        {
+            GameObject.FindFirstObjectByType<PlayerMovement>().ShowWarningTXT();
+            return;
+        }
         OnItemCollected?.Invoke(this);
-        if (PlayerMovement.isItemsFull) return;
         isCollected = true;
         gameObject.transform.parent = player;
         gameObject.transform.position = trashPoint.position;
