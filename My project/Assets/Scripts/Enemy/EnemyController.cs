@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof (HealthSystem))]
+[RequireComponent(typeof(HealthSystem))]
 public class EnemyController : MonoBehaviour, IDamaglable
 {
     [SerializeField] List<PatrolPoint> patrolPoints;
@@ -24,12 +24,18 @@ public class EnemyController : MonoBehaviour, IDamaglable
     private bool isWaiting = false;
     public bool caughtByPlayer = false;
     HealthSystem healthSystem;
+
+    [SerializeField] Sprite[] sprites;
+    SpriteRenderer spriteRenderer;
+    HealthSystem playerHealthSystem;
+
     private void OnEnable() => fow.OnPlayerSeenChanged += HandleDetection;
     private void OnDisable() => fow.OnPlayerSeenChanged -= HandleDetection;
     private void Awake()
     {
         patrolPoints.Clear();
         rb2D = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         patrolPoints.AddRange(patrolPointHolder.GetComponentsInChildren<PatrolPoint>());
 
@@ -56,6 +62,8 @@ public class EnemyController : MonoBehaviour, IDamaglable
             currentRotateSpeed = baseRotateSpeed;
         }
     }
+
+    // Patrol pause
     private void Update()
     {
         float distance = Vector2.Distance(transform.position, patrolPoints[actualPatrolPoint].transform.position);
@@ -78,6 +86,8 @@ public class EnemyController : MonoBehaviour, IDamaglable
         caughtByPlayer = false;
     }
 
+
+    // Chase and patroling
     private void FixedUpdate()
     {
 
@@ -90,7 +100,22 @@ public class EnemyController : MonoBehaviour, IDamaglable
             {
                 rb2D.velocity = Vector2.zero;
                 return;
-            } 
+            }
+
+            // Attack
+            float dist = Vector2.Distance(transform.position, targetPos);
+            print(dist);
+            if (dist < 6f)
+            {
+                spriteRenderer.sprite = sprites[1];
+            }
+            if (dist < 1f)
+            {
+                spriteRenderer.sprite = sprites[0];
+                rb2D.velocity = Vector2.zero;
+                playerHealthSystem = fow.player.gameObject.GetComponent<HealthSystem>();
+                playerHealthSystem.ChangeHealth(-1);
+            }
         }
         else
         {
