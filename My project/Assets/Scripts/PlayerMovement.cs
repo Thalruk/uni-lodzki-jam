@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         _baseSpeed = speed;
         playerSpriteRenderer.sprite = playerSprite;
         health = GetComponent<HealthSystem>();
-        health.SetStartingHealth(1);
+        health.SetStartingHealth(10);
 
         #region Subscriptions 
         FoxMask.OnFoxMaskUsed += FoxMaskUsed;
@@ -109,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
                     currentFrame = (currentFrame + 1) % playerAnimation.Length;
                     playerSpriteRenderer.sprite = playerAnimation[currentFrame];
                 }
-                currentSound = (currentSound+1) % stepSounds.Length;
+                currentSound = (currentSound + 1) % stepSounds.Length;
                 playerSounds.clip = stepSounds[currentSound];
                 playerSounds.Play();
             }

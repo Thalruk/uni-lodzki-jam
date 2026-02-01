@@ -7,7 +7,7 @@ public class Beholder : MonoBehaviour, IDamaglable
     [SerializeField] float criticalDistance = 5f;
 
     [Header("Phase 2 Settings")]
-    [SerializeField] HealthSystem healthSystem;
+    [SerializeField] public HealthSystem healthSystem;
     [SerializeField] float moveSpeed = 2f;
     [SerializeField] float laserCooldown = 5f;
     [SerializeField] GameObject laserPrefab;
@@ -78,27 +78,29 @@ public class Beholder : MonoBehaviour, IDamaglable
 
     void HandlePhase1Update()
     {
-        BeholderMiniEye eyeWithPlayer = allEyes.Find(e => !e.isDead && e.fow.playerInView && e.fow.player != null);
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return;
+
+        float distToBoss = Vector2.Distance(transform.position, player.transform.position);
+
+        if (distToBoss <= criticalDistance)
+        {
+            foreach (var eye in allEyes)
+            {
+                if (eye != null && !eye.isDead)
+                {
+                    eye.forceLookTarget = player.transform;
+                    eye.ShootIfReady(player.transform);
+                }
+            }
+            return;
+        }
+
+        BeholderMiniEye eyeWithPlayer = allEyes.Find(e => !e.isDead && e.fow != null && e.fow.playerInView);
 
         if (eyeWithPlayer != null)
         {
-            float dist = Vector2.Distance(transform.position, eyeWithPlayer.fow.player.transform.position);
-
-            if (dist <= criticalDistance)
-            {
-                foreach (var eye in allEyes)
-                {
-                    if (eye != null && !eye.isDead)
-                    {
-                        eye.forceLookTarget = eyeWithPlayer.fow.player.transform;
-                        eye.ShootIfReady(eyeWithPlayer.fow.player.transform);
-                    }
-                }
-            }
-            else
-            {
-                ResetForceLook();
-            }
+            ResetForceLook();
         }
         else
         {
@@ -218,5 +220,10 @@ public class Beholder : MonoBehaviour, IDamaglable
     {
         if (healthSystem != null)
             healthSystem.OnDie -= HandleBossDeath;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, criticalDistance);
     }
 }

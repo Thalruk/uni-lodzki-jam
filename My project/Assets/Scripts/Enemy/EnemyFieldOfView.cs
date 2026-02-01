@@ -25,7 +25,14 @@ public class EnemyFieldOfView : MonoBehaviour
     private void Awake()
     {
         circleCollider = GetComponent<CircleCollider2D>();
-        circleCollider.radius = radius / transform.localScale.x;
+        if (transform.localScale.x > 1)
+        {
+            circleCollider.radius = radius * transform.localScale.x;
+        }
+        else
+        {
+            circleCollider.radius = radius / transform.localScale.x;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

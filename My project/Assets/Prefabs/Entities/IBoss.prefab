@@ -205,7 +205,7 @@ MonoBehaviour:
   closedEye: {fileID: 8951507476608551626}
   mainEyePupil: {fileID: 6167665531305213271}
   pupilOffset: 0.5
-  rotationSpeed: 60
+  rotationSpeed: 5
 --- !u!114 &8335586353040774811
 MonoBehaviour:
   m_ObjectHideFlags: 0
