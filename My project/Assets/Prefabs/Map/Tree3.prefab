@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6963437841574129980}
   - component: {fileID: 8886851021788333973}
-  m_Layer: 0
+  - component: {fileID: 7684751860873201853}
+  m_Layer: 6
   m_Name: wood1
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +85,61 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &7684751860873201853
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5760328888289277947}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4.62, y: 4.57}
+    newSize: {x: 4.62, y: 4.57}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -1.75, y: -1.275}
+      - {x: -2.1699998, y: 0.265}
+      - {x: -1.78, y: 1.395}
+      - {x: -0.81, y: 1.995}
+      - {x: 0.59, y: 2.0149999}
+      - {x: 1.61, y: 1.505}
+      - {x: 2.18, y: 0.185}
+      - {x: 1.99, y: -0.92499995}
+      - {x: 1.3399999, y: -1.6949999}
+      - {x: -0.29, y: -2.205}
+  m_UseDelaunayMesh: 0
 --- !u!1 &6498839150041841571
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +214,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 734b7a8f1e214ac4b9f93c5cd72a8467, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -183,3 +239,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 48cac956a8684164a93774e29d09c616, type: 2}
+  visibility: 0.5

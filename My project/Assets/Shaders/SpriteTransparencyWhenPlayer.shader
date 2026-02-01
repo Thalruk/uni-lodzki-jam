@@ -52,6 +52,8 @@ Shader "Sprites/TransparencyWhenPlayer"
             sampler2D _MainTex, _AlphaTex;
             float4 _MainTex_ST;
 
+            float _Visibility;
+
             v2f vert (appdata v)
             {
                 v2f o;
@@ -69,7 +71,7 @@ Shader "Sprites/TransparencyWhenPlayer"
 
 
                 float distToPlayer = length(i.ViewPos);
-                transparency = saturate(lerp(0, 1, distToPlayer * 0.1));
+                transparency = saturate(lerp(0, 1, distToPlayer * _Visibility));
                 transparency *= tex2D(_MainTex, i.uv).a;
                 transparency = saturate(transparency);
                 //return float4(distToPlayer, 0, 0, 1);
