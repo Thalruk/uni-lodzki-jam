@@ -2,6 +2,8 @@ using UnityEngine;
 public class SpiritMask : ItemBaseClass
 {
     GameObject camera;
+    [SerializeField] AudioSource sound;
+    [SerializeField] AudioClip clip;
     private void Start()
     {
         isPassive = true;
@@ -13,6 +15,7 @@ public class SpiritMask : ItemBaseClass
     }
     protected override void Use()
     {
+        sound.PlayOneShot(clip);
         //camera.GetComponent<PostProcessVolume>().enabled = true;
         Time.timeScale = 0f;
         camera.GetComponent<ZaWarudo>().enabled = true;
