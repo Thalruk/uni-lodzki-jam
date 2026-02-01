@@ -26,7 +26,7 @@ public class HealthSystem : MonoBehaviour
     {
         if (!grid)
             return;
-        currentIntensity = Mathf.Lerp(currentIntensity, vignetteIntensity, 0.1f);
+        currentIntensity = Mathf.Lerp(currentIntensity, minIntensity, 0.7f * Time.deltaTime);
         vignette.intensity.value = currentIntensity;
     }
     public void SetStartingHealth(int value)
@@ -48,13 +48,22 @@ public class HealthSystem : MonoBehaviour
         {
             case 1:
                 Instantiate(healthImage, grid.transform);
-                vignetteIntensity -= 0.3f;
-                print("DMG");
+                if (health <= 3)
+                {
+                    minIntensity = 0.25f * (4 - health);
+                }
+                currentIntensity = minIntensity;
+                minIntensity -= 0.2f;
+                minIntensity = Mathf.Clamp01(minIntensity);
+
                 break;
             case -1:
                 Destroy(grid.transform.GetChild(0).gameObject);
-                vignetteIntensity += 0.3f;
-                print("DMG");
+                if (health <= 3)
+                {
+                    minIntensity = 0.25f * (4 - health);
+                }
+                currentIntensity = minIntensity + 0.2f;
                 break;
         }
 
@@ -63,6 +72,7 @@ public class HealthSystem : MonoBehaviour
     {
         health += value;
         OnHealthChanged?.Invoke();
+
         UpdateHealth(value);
         if (health <= 0)
         {

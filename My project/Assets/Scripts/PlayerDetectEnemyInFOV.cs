@@ -58,7 +58,7 @@ public class PlayerDetectEnemyInFOV : MonoBehaviour
 
             RaycastHit2D hit2D = Physics2D.Raycast(transform.position, toEnemy, dist, enemyLayer);
             Debug.DrawLine(transform.position, hit2D.point, UnityEngine.Color.green);
-            if (hit2D.collider != null && hit2D.collider.CompareTag("Enemy"))
+            if (hit2D.collider != null && hit2D.collider.CompareTag("Enemy") && !transform.parent)
             {
                 EnemyController enemyController = hit2D.collider.gameObject.GetComponent<EnemyController>();
                 if (!enemyController.caughtByPlayer)
