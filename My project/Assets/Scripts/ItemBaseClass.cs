@@ -14,7 +14,7 @@ public class ItemBaseClass : MonoBehaviour, Interactable
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("PlayerGraphics").transform;
-        trashPoint = GameObject.FindWithTag("TrashPoint").transform;
+        trashPoint = GameObject.FindWithTag("TrashPoint")?.transform;
     }
     protected virtual void Use()
     {
@@ -23,7 +23,7 @@ public class ItemBaseClass : MonoBehaviour, Interactable
 
     protected virtual void Collect()
     {
-        if (PlayerMovement.isItemsFull) 
+        if (PlayerMovement.isItemsFull)
         {
             GameObject.FindFirstObjectByType<PlayerMovement>().ShowWarningTXT();
             return;

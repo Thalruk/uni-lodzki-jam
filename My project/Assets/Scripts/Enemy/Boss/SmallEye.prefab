@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5629525467239883437}
   - component: {fileID: 2694533148514586855}
+  - component: {fileID: 4945023825937604004}
   m_Layer: 0
   m_Name: BeholderEye
   m_TagString: Untagged
@@ -84,6 +85,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 1
   m_SpriteSortPoint: 0
+--- !u!114 &4945023825937604004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231390630203566108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa594d71e6186941890cc4d01ab6a6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: 250560512cbd5794191f95dfb2c3ee6e, type: 2}
 --- !u!1 &9073372558426952292
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,6 +114,7 @@ GameObject:
   - component: {fileID: 7381229856773392574}
   - component: {fileID: 2585727013309122638}
   - component: {fileID: 5743676687915953012}
+  - component: {fileID: 4421769989008786806}
   m_Layer: 0
   m_Name: SmallEye
   m_TagString: MiniEye
@@ -148,7 +163,7 @@ MonoBehaviour:
   - {fileID: 3138275684053206616, guid: da5e5d77922ed7043812e0a3bf7e637f, type: 3}
   - {fileID: 1331987396010035451, guid: 691afb20f2792bc42a86a938343cb9f0, type: 3}
   - {fileID: 2256332530393482209, guid: 9015649034c0a9c41af07034e1188770, type: 3}
-  fireRate: 1
+  fireRate: 3
   shootOffset: 5
   isDead: 1
   forceLookTarget: {fileID: 0}
@@ -442,3 +457,16 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &4421769989008786806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9073372558426952292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa594d71e6186941890cc4d01ab6a6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: 250560512cbd5794191f95dfb2c3ee6e, type: 2}

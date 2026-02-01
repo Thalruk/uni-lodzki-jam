@@ -17,6 +17,13 @@ public class Beholder : MonoBehaviour
     private float laserTimer;
     private Transform playerTransform;
 
+    [Header("Main Eye Visuals")]
+    [SerializeField] Transform mainEyePupil;
+    [SerializeField] float pupilOffset = 0.5f;
+    [SerializeField] float rotationSpeed = 60f;
+
+    private float currentMainEyeAngle;
+
     public void RegisterEyes(List<BeholderMiniEye> eyes)
     {
         allEyes = eyes;
@@ -123,12 +130,15 @@ public class Beholder : MonoBehaviour
         Vector2 dirToPlayer = (playerTransform.position - transform.position).normalized;
         float targetAngle = Mathf.Atan2(dirToPlayer.y, dirToPlayer.x) * Mathf.Rad2Deg;
 
-        float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.z, targetAngle, 20f * Time.deltaTime);
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        currentMainEyeAngle = Mathf.MoveTowardsAngle(currentMainEyeAngle, targetAngle, rotationSpeed * Time.deltaTime);
 
-        if (playerTransform == null) return;
+        if (mainEyePupil != null)
+        {
+            mainEyePupil.rotation = Quaternion.Euler(0, 0, currentMainEyeAngle);
 
-        transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.deltaTime);
+            Vector2 visualOffset = new Vector2(Mathf.Cos(currentMainEyeAngle * Mathf.Deg2Rad), Mathf.Sin(currentMainEyeAngle * Mathf.Deg2Rad)) * pupilOffset;
+            mainEyePupil.localPosition = visualOffset;
+        }
 
         foreach (var eye in allEyes)
         {
@@ -146,18 +156,19 @@ public class Beholder : MonoBehaviour
             laserTimer = laserCooldown;
         }
     }
+
     void FireBigLaser()
     {
-        if (laserPrefab != null)
+        if (laserPrefab != null && mainEyePupil != null)
         {
-            GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity, transform);
+            GameObject laser = Instantiate(laserPrefab, mainEyePupil.position, mainEyePupil.rotation, mainEyePupil);
+
             if (laser.TryGetComponent<BeholderLaser>(out var laserScript))
             {
                 laserScript.Setup(playerTransform);
             }
         }
     }
-
     void StartPhase2()
     {
         isPhase2 = true;

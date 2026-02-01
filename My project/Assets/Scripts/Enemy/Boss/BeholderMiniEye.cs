@@ -85,7 +85,7 @@ public class BeholderMiniEye : MonoBehaviour, IDamaglable
         }
 
         float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
-        bullet.transform.rotation = Quaternion.Euler(0, 0, angle);
+        bullet.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
 
         if (bullet.TryGetComponent<Rigidbody2D>(out var rb))
         {
