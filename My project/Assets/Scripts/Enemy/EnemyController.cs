@@ -49,6 +49,8 @@ public class EnemyController : MonoBehaviour, IDamaglable
         }
         healthSystem = GetComponent<HealthSystem>();
         healthSystem.SetStartingHealth(1);
+
+        healthSystem.OnDie += Die;
     }
 
     private void HandleDetection(bool spotted)
@@ -153,5 +155,10 @@ public class EnemyController : MonoBehaviour, IDamaglable
     public void TakeDamage()
     {
         healthSystem.ChangeHealth(-1);
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 }
