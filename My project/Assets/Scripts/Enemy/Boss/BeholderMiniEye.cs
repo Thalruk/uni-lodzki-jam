@@ -51,9 +51,9 @@ public class BeholderMiniEye : MonoBehaviour, IDamaglable
             fireTimer -= Time.deltaTime;
         }
 
-        if (fow.playerInView)
+        if (fow.playerInView && fow.player != null)
         {
-            ShootIfReady();
+            ShootIfReady(fow.player.transform);
         }
     }
 
@@ -87,20 +87,32 @@ public class BeholderMiniEye : MonoBehaviour, IDamaglable
         if (projectiles.Count == 0) return;
 
         Projectile bulletPrefab = projectiles[Random.Range(0, projectiles.Count)];
-        Projectile bullet = Instantiate(bulletPrefab.gameObject, new Vector3(eyeVisual.position.x, eyeVisual.position.y, -0.1f), transform.rotation).GetComponent<Projectile>();
+
+        GameObject bulletObj = Instantiate(bulletPrefab.gameObject,
+            new Vector3(eyeVisual.position.x, eyeVisual.position.y, -0.1f),
+            transform.rotation);
+
+        Projectile bullet = bulletObj.GetComponent<Projectile>();
 
         Vector2 shootDirection;
 
-        if (target != null)
+        Transform finalTarget = target;
+        if (finalTarget == null && fow != null && fow.playerInView)
         {
-            Vector3 targetPos = target.position;
+            finalTarget = fow.player.transform;
+        }
+
+        if (finalTarget != null)
+        {
+            Vector3 targetPos = finalTarget.position;
             Vector3 randomSpread = (Vector3)Random.insideUnitCircle * shootOffset;
-            Vector3 finalTarget = targetPos + randomSpread;
-            shootDirection = (finalTarget - eyeVisual.position).normalized;
+            Vector3 finalTargetPos = targetPos + randomSpread;
+
+            shootDirection = (finalTargetPos - eyeVisual.position).normalized;
         }
         else
         {
-            shootDirection = transform.right;
+            shootDirection = lookDir;
         }
 
         float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
@@ -111,10 +123,10 @@ public class BeholderMiniEye : MonoBehaviour, IDamaglable
             rb.velocity = shootDirection * bullet.speed;
         }
 
-        if (TryGetComponent<AudioSource>(out var source))
+        if (laserSource != null)
         {
             laserSource.pitch = Random.Range(0.85f, 1.15f);
-            laserSource.Play();
+            laserSource.PlayOneShot(laserSource.clip);
         }
     }
     public void SetFireRate(float newRate) => fireRate = newRate;

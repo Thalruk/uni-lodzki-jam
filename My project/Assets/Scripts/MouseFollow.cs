@@ -8,7 +8,6 @@ public class MouseFollow : MonoBehaviour
     [SerializeField] Transform eye;
 
     private Vector3 targetLocalPos;
-
     private void Update()
     {
         Vector2 mousePos = Input.mousePosition;
