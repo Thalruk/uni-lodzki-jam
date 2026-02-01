@@ -15,8 +15,7 @@ public class BowHandler : ItemBaseClass
     }
     public void CollectBowl()
     {
-        base.Collect();
-        
+        base.Collect(); 
     }
     protected override void Use()
     {

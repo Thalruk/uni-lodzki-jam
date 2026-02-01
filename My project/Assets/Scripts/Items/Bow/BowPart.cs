@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class BowPart : ItemBaseClass
+public class BowPart : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI partsUI;
-    protected override void Collect()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (BowCollector.bowParts <= 1 ||!PlayerMovement.isItemsFull)
+        if (collision.CompareTag("Player"))
         {
-            print(PlayerMovement.isItemsFull);
-            BowCollector.CollectPart();
-            partsUI.text = BowCollector.bowParts.ToString() + "/ 3";
-            Destroy(gameObject);
+            if (BowCollector.bowParts < 2 || !PlayerMovement.isItemsFull)
+            {
+                BowCollector.CollectPart();
+                partsUI.text = BowCollector.bowParts.ToString() + "/ 3";
+                Destroy(gameObject);
+            }
+            else if (PlayerMovement.isItemsFull)
+            {
+                collision.GetComponent<PlayerMovement>().ShowWarningTXT();
+            }
         }
-
     }
 }

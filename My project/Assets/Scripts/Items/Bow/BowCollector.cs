@@ -11,13 +11,13 @@ public static class BowCollector
     public static void CollectPart()
     {
         bowParts++;
-        if(bowParts == 3)
+        if(bowParts >= 3 && !PlayerMovement.isItemsFull)
         {
             isBowCompleted = true;
             GameObject.FindAnyObjectByType<BowHandler>().CollectBowl();
-        }else if (PlayerMovement.isItemsFull)
+        }else if (PlayerMovement.isItemsFull && bowParts > 2)
         {
-            GameObject.FindAnyObjectByType<BowHandler>().CollectBowl();
+            GameObject.FindObjectOfType<PlayerMovement>().ShowWarningTXT();
         }
     }
 }
