@@ -10,6 +10,8 @@ public class BeholderMiniEye : MonoBehaviour, IDamaglable
     [SerializeField] Sprite openEye;
     [SerializeField] Sprite closedEye;
     [SerializeField] HealthSystem healthSystem;
+    [SerializeField] AudioSource laserSource;
+    [SerializeField] AudioSource hitSource;
 
     [Header("Patrol & Smoothness")]
     [SerializeField] float patrolAngle = 30f;
@@ -39,6 +41,7 @@ public class BeholderMiniEye : MonoBehaviour, IDamaglable
         baseAngle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         currentAngle = baseAngle;
         healthSystem.SetStartingHealth(1);
+        fireTimer = Random.Range(0f, fireRate);
     }
 
     void Update()
@@ -48,39 +51,69 @@ public class BeholderMiniEye : MonoBehaviour, IDamaglable
             fireTimer -= Time.deltaTime;
         }
 
-        if (fow.playerInView)
+        if (fow.playerInView && fow.player != null)
         {
-            ShootIfReady();
+            ShootIfReady(fow.player.transform);
         }
     }
 
     public void ShootIfReady(Transform target = null)
     {
+        if (isDead) return;
+
+
         if (fireTimer <= 0)
         {
-            Shoot(target);
-            fireTimer = fireRate;
+            float randomDelay = Random.Range(0f, 0.2f);
+
+            forceLookTarget = target;
+
+            Invoke(nameof(ExecuteShot), randomDelay);
+            print("SHOOT");
+
+            fireTimer = fireRate + randomDelay;
         }
     }
-    public void SetFireRate(float newRate) => fireRate = newRate;
+
+    private void ExecuteShot()
+    {
+        if (isDead) return;
+
+        Shoot(forceLookTarget);
+    }
 
     void Shoot(Transform target = null)
     {
         if (projectiles.Count == 0) return;
 
         Projectile bulletPrefab = projectiles[Random.Range(0, projectiles.Count)];
-        GameObject bulletObj = ObjectPool.Instance.GetPooledObject(bulletPrefab.gameObject);
 
-        if (bulletObj == null) return;
-
-        bulletObj.transform.position = eyeVisual.position;
-        bulletObj.SetActive(true);
+        GameObject bulletObj = Instantiate(bulletPrefab.gameObject,
+            new Vector3(eyeVisual.position.x, eyeVisual.position.y, -0.1f),
+            transform.rotation);
 
         Projectile bullet = bulletObj.GetComponent<Projectile>();
 
-        Vector3 targetPos = (target != null) ? target.position : (fow.player != null ? fow.player.transform.position : transform.position + transform.right);
-        Vector3 finalTarget = targetPos + (Vector3)Random.insideUnitCircle * shootOffset;
-        Vector2 shootDirection = (finalTarget - eyeVisual.position).normalized;
+        Vector2 shootDirection;
+
+        Transform finalTarget = target;
+        if (finalTarget == null && fow != null && fow.playerInView)
+        {
+            finalTarget = fow.player.transform;
+        }
+
+        if (finalTarget != null)
+        {
+            Vector3 targetPos = finalTarget.position;
+            Vector3 randomSpread = (Vector3)Random.insideUnitCircle * shootOffset;
+            Vector3 finalTargetPos = targetPos + randomSpread;
+
+            shootDirection = (finalTargetPos - eyeVisual.position).normalized;
+        }
+        else
+        {
+            shootDirection = lookDir;
+        }
 
         float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
         bullet.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
@@ -89,7 +122,14 @@ public class BeholderMiniEye : MonoBehaviour, IDamaglable
         {
             rb.velocity = shootDirection * bullet.speed;
         }
+
+        if (laserSource != null)
+        {
+            laserSource.pitch = Random.Range(0.85f, 1.15f);
+            laserSource.PlayOneShot(laserSource.clip);
+        }
     }
+    public void SetFireRate(float newRate) => fireRate = newRate;
 
     public Transform forceLookTarget;
 
@@ -142,7 +182,11 @@ public class BeholderMiniEye : MonoBehaviour, IDamaglable
 
     public void TakeDamage()
     {
-        print("EYE HIT");
+        if (TryGetComponent<AudioSource>(out var source))
+        {
+            hitSource.pitch = 1;
+            hitSource.Play();
+        }
         isDead = true;
         fireTimer = float.MaxValue;
         GetComponent<SpriteRenderer>().sprite = closedEye;

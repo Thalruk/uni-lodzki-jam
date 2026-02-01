@@ -221,4 +221,8 @@ public class Beholder : MonoBehaviour, IDamaglable
         if (healthSystem != null)
             healthSystem.OnDie -= HandleBossDeath;
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, criticalDistance);
+    }
 }
