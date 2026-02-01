@@ -14,6 +14,7 @@ public class HealthSystem : MonoBehaviour
     Vignette vignette;
     float vignetteIntensity = 0f;
     float currentIntensity = 0f;
+    float minIntensity = 0f;
     float t = 0f;
     private void Start()
     {
