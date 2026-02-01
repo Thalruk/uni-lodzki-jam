@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public static bool isItemsFull = false;
     public HealthSystem health;
     public AudioSource playerSounds;
-    [SerializeField] float speed;
+    [SerializeField] float speed, foxMaskDashCooldownMultiplayer, foxMaskSpeedMultiplayer;
     [SerializeField] Vector2 movementDirection;
     [SerializeField] TextMeshProUGUI warningTXT;
     [SerializeField] SpriteRenderer playerSpriteRenderer;
@@ -211,7 +211,7 @@ public class PlayerMovement : MonoBehaviour
     #region FoxMaskLogic
     void FoxMaskUsed()
     {
-        SetDashCooldown(dashCooldown / 2, speed * 1.2f);
+        SetDashCooldown(dashCooldown / foxMaskDashCooldownMultiplayer, speed * foxMaskSpeedMultiplayer);
     }
     public void ResetMovementToBasic()
     {
