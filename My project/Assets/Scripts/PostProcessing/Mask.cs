@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -5,9 +6,9 @@ public class Mask : MonoBehaviour
 {
     RenderTexture maskRT;
     CommandBuffer cb;
-    [SerializeField] Material[] maskMaterial;
-
-    [SerializeField] GameObject[] coneGameObj;
+    [SerializeField] Material defaultMaskMaterial;
+    [SerializeField] List<Material> maskMaterial = new List<Material>();
+    [SerializeField] List<GameObject> coneGameObj = new List<GameObject>();
     Renderer cone;
     void Start()
     {
@@ -44,6 +45,15 @@ public class Mask : MonoBehaviour
         );
 
         Shader.SetGlobalTexture("_ScreenMaskTexture", maskRT);
+    }
+
+    public void AddLightObj(GameObject go, Material mat)
+    {
+        coneGameObj.Add(go);
+        if (!mat)
+            maskMaterial.Add(defaultMaskMaterial);
+        else
+            maskMaterial.Add(mat);
     }
 
 

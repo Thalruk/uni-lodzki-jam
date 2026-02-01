@@ -69,7 +69,7 @@ Shader "Sprites/TransparencyWhenPlayer"
 
 
                 float distToPlayer = length(i.ViewPos);
-                transparency = saturate(lerp(0, 1, distToPlayer * 0.25));
+                transparency = saturate(lerp(0, 1, distToPlayer * 0.1));
                 transparency *= tex2D(_MainTex, i.uv).a;
                 transparency = saturate(transparency);
                 //return float4(distToPlayer, 0, 0, 1);
