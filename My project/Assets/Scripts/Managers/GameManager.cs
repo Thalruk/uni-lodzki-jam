@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject loseMenu, winMenu, startMenu;
+    [SerializeField] AudioSource music;
     private void Start()
     {
         PlayerMovement.OnPlayerDeath += OnLose;
@@ -21,17 +22,20 @@ public class GameManager : MonoBehaviour
     }
     void OnWin()
     {
+        music.Stop();
         Time.timeScale = 0f;
         winMenu.SetActive(true);
     }
     public void StartGame()
     {
         BowCollector.Reset();
+        music.Play();
         Time.timeScale = 1f;
         startMenu.SetActive(false);
     }
     void OnLose()
     {
+        music.Stop();
         Time.timeScale = 0f;
         loseMenu.SetActive(true);
     }
