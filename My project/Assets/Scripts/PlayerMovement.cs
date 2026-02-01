@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public static bool isItemsFull = false;
     public HealthSystem health;
+    public AudioSource playerSounds;
     [SerializeField] float speed;
     [SerializeField] Vector2 movementDirection;
     [SerializeField] TextMeshProUGUI warningTXT;
@@ -22,12 +23,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashPower;
     [SerializeField] float dashTime;
     [SerializeField] float dashCooldown;
+    [SerializeField] AudioClip[] stepSounds;
     [SerializeField] Animation playerAnimation;
     [SerializeField] List<Image> uiImagesOfMasks = new List<Image>();
     [SerializeField] List<Image> uiImagesOfMasksBG = new List<Image>();
     List<ItemBaseClass> items = new List<ItemBaseClass>();
     private float _baseDashCooldown, _baseSpeed;
-    int equippedItemIndex;
+    int equippedItemIndex, currentSound;
     bool VendigoState = false, vendigoLeftHandUsed;
     float horizontal;
     float vertical;
@@ -92,11 +94,19 @@ public class PlayerMovement : MonoBehaviour
         transform.position += (Vector3)movementDirection * speed * Time.unscaledDeltaTime;
         if (movementDirection != Vector2.zero)
         {
-            playerAnimation.Play();
+            //playerAnimation.Play();
+            if (!playerSounds.isPlaying)
+            {
+
+                currentSound++;
+                currentSound = currentSound%stepSounds.Length;
+                playerSounds.clip = stepSounds[currentSound];
+                playerSounds.Play();
+            }
         }
         else
         {
-            playerAnimation.Stop();
+            //playerAnimation.Stop();
             playerSpriteRenderer.sprite = playerSprite;
         }
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

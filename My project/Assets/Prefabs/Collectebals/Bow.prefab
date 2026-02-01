@@ -167,6 +167,8 @@ MonoBehaviour:
   isPassive: 0
   isEquipped: 0
   arrow: {fileID: 7871011489676895040, guid: de4b15baa682a3a4ea1e7174ed8165c6, type: 3}
+  arrowClip: {fileID: 8300000, guid: f090fc224e5687e48845a01f8146f32f, type: 3}
+  sfx: {fileID: 0}
 --- !u!61 &6344292441680745146
 BoxCollider2D:
   m_ObjectHideFlags: 0
