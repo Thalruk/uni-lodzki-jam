@@ -57,8 +57,12 @@ public class ItemBaseClass : MonoBehaviour, Interactable
     }
     protected virtual void Unequip()
     {
-        gameObject.transform.position = trashPoint.position;
-        isEquipped = false;
+        if (isEquipped)
+        {
+            gameObject.transform.position = trashPoint.position;
+            isEquipped = false;
+        }
+
     }
     public bool TryEquip()
     {

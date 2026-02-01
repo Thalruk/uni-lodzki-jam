@@ -559,7 +559,7 @@ GameObject:
   - component: {fileID: 7709725396320602759}
   - component: {fileID: 1852308609749760492}
   - component: {fileID: 5268826091032575051}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: VendigoRigthArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -706,7 +706,7 @@ GameObject:
   - component: {fileID: 578487958056097088}
   - component: {fileID: 1305634111180223467}
   - component: {fileID: 7622929381432729044}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: VendigoLeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1090,7 +1090,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7157393696361923628}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: VendigoStateHands
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame()
     {
+        BowCollector.Reset();
         Time.timeScale = 1f;
         startMenu.SetActive(false);
     }

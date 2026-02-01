@@ -16,13 +16,21 @@ public class EyeMask : ItemBaseClass
         cooldown = useDuration + cooldown;
         objectsForTracking = GameObject.FindGameObjectsWithTag("Track").ToList();
     }
+    protected override void Unequip()
+    {
+        base.Unequip();
+    }
     protected override void Use()
     {
         FindClosestTrackableObject();
     }
     void FindClosestTrackableObject()
     {
-        if (objectsForTracking.Count == 0) return;
+        if (objectsForTracking.Count == 0 || objectsForTracking.All(x => x == null))
+        {
+            Unequip();
+            return;
+        }
         float tempDistance = Mathf.Infinity;
         float currentDistance = 0;
         for (int i = 0; i < objectsForTracking.Count; i++)
