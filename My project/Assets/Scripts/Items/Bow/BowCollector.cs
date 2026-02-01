@@ -11,9 +11,12 @@ public static class BowCollector
     public static void CollectPart()
     {
         bowParts++;
-        if(bowParts >= 3)
+        if(bowParts == 3)
         {
             isBowCompleted = true;
+            GameObject.FindAnyObjectByType<BowHandler>().CollectBowl();
+        }else if (PlayerMovement.isItemsFull)
+        {
             GameObject.FindAnyObjectByType<BowHandler>().CollectBowl();
         }
     }

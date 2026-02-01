@@ -31,7 +31,7 @@ public class HealthSystem : MonoBehaviour
                 Instantiate(healthImage, grid.transform);
                 break;
             case -1:
-                Destroy(grid.transform.GetChild(0));
+                Destroy(grid.transform.GetChild(0).gameObject);
                 break;
         }
 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3450395002646511161}
   - component: {fileID: 3807081217156193687}
   - component: {fileID: 461738329356168338}
+  - component: {fileID: 10516024016639882}
   m_Layer: 0
   m_Name: GreekMask
   m_TagString: Untagged
@@ -158,3 +159,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &10516024016639882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6960148515868871005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89eb436ea8c311a4a924f82aeb09a4ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

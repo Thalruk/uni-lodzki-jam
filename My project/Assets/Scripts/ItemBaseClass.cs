@@ -23,8 +23,9 @@ public class ItemBaseClass : MonoBehaviour, Interactable
 
     protected virtual void Collect()
     {
-        isCollected = true;
         OnItemCollected?.Invoke(this);
+        if (PlayerMovement.isItemsFull) return;
+        isCollected = true;
         gameObject.transform.parent = player;
         gameObject.transform.position = trashPoint.position;
         if (gameObject.TryGetComponent(out Collider2D collider))

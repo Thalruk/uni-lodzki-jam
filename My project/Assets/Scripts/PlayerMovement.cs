@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(HealthSystem), typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    public static bool isItemsFull = false;
+    public HealthSystem health;
     [SerializeField] float speed;
     [SerializeField] Vector2 movementDirection;
+    [SerializeField] TextMeshProUGUI warningTXT;
     [SerializeField] SpriteRenderer playerSpriteRenderer;
     [SerializeField] Sprite vendigoSprite, playerSprite;
     [SerializeField] GameObject vendigoStateHands;
@@ -23,18 +27,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] List<Image> uiImagesOfMasksBG = new List<Image>();
     List<ItemBaseClass> items = new List<ItemBaseClass>();
     private float _baseDashCooldown, _baseSpeed;
-    public static bool isItemsFull = false;
     int equippedItemIndex;
     bool VendigoState = false, vendigoLeftHandUsed;
     float horizontal;
     float vertical;
-    Rigidbody2D rb;
-    HealthSystem health;
-   
+    Rigidbody2D rb;   
     Color colorBase;
     public void AddItemToInventory(ItemBaseClass item)
     {
-        if (items.Count < 3)
+        if (items.Count >= 3)
         {
             items.Add(item);
             uiImagesOfMasks[items.Count - 1].sprite = item.maskImage;
@@ -43,7 +44,13 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             isItemsFull = true;
+            warningTXT.text = "Your inventory is full. To free place choose item and press \"G\"";
+            Invoker.InvokeDelayed(ClearWarningTXT,6f);
         }
+    }
+    void ClearWarningTXT()
+    {
+        warningTXT.text = string.Empty;
     }
     private void Awake()
     {
@@ -168,6 +175,7 @@ public class PlayerMovement : MonoBehaviour
         item.gameObject.transform.position = transform.position + (transform.right * 2f);
         item.GetComponent<Collider2D>().enabled = true;
         items.RemoveAt(index);
+        isItemsFull = false;
         UIUpdate();
     }
     void EquipItem(int index)
