@@ -6,6 +6,8 @@ using UnityEngine;
 public class BowHandler : ItemBaseClass
 {
     [SerializeField] GameObject arrow;
+    [SerializeField] AudioClip arrowClip;
+    [SerializeField] AudioSource sfx;
     private void Start()
     {
         transform.position = trashPoint.position;
@@ -20,5 +22,6 @@ public class BowHandler : ItemBaseClass
     protected override void Use()
     {
         Instantiate(arrow, transform.position,transform.rotation);
+        sfx.PlayOneShot(arrowClip);
     }
 }
