@@ -92,11 +92,13 @@ public class PlayerMovement : MonoBehaviour
         transform.position += (Vector3)movementDirection * speed * Time.unscaledDeltaTime;
         if (movementDirection != Vector2.zero)
         {
-            //playerAnimation.Play();
             if (!playerSounds.isPlaying)
             {
-                currentFrame = (currentFrame+1)%playerAnimation.Length;
-                playerSpriteRenderer.sprite = playerAnimation[currentFrame];
+                if (!VendigoState)
+                {
+                    currentFrame = (currentFrame + 1) % playerAnimation.Length;
+                    playerSpriteRenderer.sprite = playerAnimation[currentFrame];
+                }
                 currentSound = (currentSound+1) % stepSounds.Length;
                 playerSounds.clip = stepSounds[currentSound];
                 playerSounds.Play();
@@ -104,8 +106,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            //playerAnimation.Stop();
-            playerSpriteRenderer.sprite = playerSprite;
+            if (!VendigoState)
+            {
+                playerSpriteRenderer.sprite = playerSprite;
+            }
+
         }
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = new Vector2(transform.position.x - mousePos.x, transform.position.y - mousePos.y);
