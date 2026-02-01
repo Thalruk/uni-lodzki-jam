@@ -40,13 +40,21 @@ public class PlayerMovement : MonoBehaviour
             items.Add(item);
             uiImagesOfMasks[items.Count - 1].sprite = item.maskImage;
             uiImagesOfMasks[items.Count - 1].color = Color.white;
+            if(items.Count == 3)
+            {
+                isItemsFull = true;
+            }
         }
         else
         {
             isItemsFull = true;
-            warningTXT.text = "Your inventory is full. To free place choose item and press \"G\"";
-            Invoker.InvokeDelayed(ClearWarningTXT, 6f);
+            ShowWarningTXT();
         }
+    }
+    public void ShowWarningTXT()
+    {
+        warningTXT.text = "Your inventory is full. To free place choose item and press \"G\"";
+        Invoker.InvokeDelayed(ClearWarningTXT, 6f);
     }
     void ClearWarningTXT()
     {
