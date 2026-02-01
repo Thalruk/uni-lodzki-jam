@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ public class Beholder : MonoBehaviour, IDamaglable
 {
     private List<BeholderMiniEye> allEyes = new List<BeholderMiniEye>();
     [SerializeField] float criticalDistance = 5f;
-
+    public static event Action OnBossDie;
     [Header("Phase 2 Settings")]
     [SerializeField] HealthSystem healthSystem;
     [SerializeField] float moveSpeed = 2f;
@@ -211,6 +212,7 @@ public class Beholder : MonoBehaviour, IDamaglable
     }
     private void HandleBossDeath()
     {
+        OnBossDie?.Invoke();
         Destroy(gameObject);
     }
 
