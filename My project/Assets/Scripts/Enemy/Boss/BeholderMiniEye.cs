@@ -51,9 +51,9 @@ public class BeholderMiniEye : MonoBehaviour, IDamaglable
             fireTimer -= Time.deltaTime;
         }
 
-        if (fow.playerInView)
+        if (fow.playerInView && fow.player != null)
         {
-            ShootIfReady();
+            ShootIfReady(fow.player.transform);
         }
     }
 
