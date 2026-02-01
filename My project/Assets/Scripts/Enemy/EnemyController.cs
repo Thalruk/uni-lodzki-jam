@@ -23,11 +23,15 @@ public class EnemyController : MonoBehaviour, IDamaglable
     private bool isChasing = false;
     private bool isWaiting = false;
     public bool caughtByPlayer = false;
+    bool bited = false;
+    float bitedCooldown = 0f;
     HealthSystem healthSystem;
 
     [SerializeField] Sprite[] sprites;
     SpriteRenderer spriteRenderer;
     HealthSystem playerHealthSystem;
+
+
 
     private void OnEnable() => fow.OnPlayerSeenChanged += HandleDetection;
     private void OnDisable() => fow.OnPlayerSeenChanged -= HandleDetection;
@@ -93,7 +97,7 @@ public class EnemyController : MonoBehaviour, IDamaglable
 
         Vector2 targetPos;
 
-        if (isChasing && fow.player != null)
+        if (isChasing && fow.player != null && !bited)
         {
             targetPos = fow.player.transform.position;
             if (caughtByPlayer)
@@ -105,20 +109,30 @@ public class EnemyController : MonoBehaviour, IDamaglable
             // Attack
             float dist = Vector2.Distance(transform.position, targetPos);
             print(dist);
-            if (dist < 6f)
+            if (dist < 7f)
             {
                 spriteRenderer.sprite = sprites[1];
             }
-            if (dist < 1f)
+            if (dist < 2.5f)
             {
                 spriteRenderer.sprite = sprites[0];
-                rb2D.velocity = Vector2.zero;
                 playerHealthSystem = fow.player.gameObject.GetComponent<HealthSystem>();
                 playerHealthSystem.ChangeHealth(-1);
+                rb2D.velocity = Vector2.zero;
+                bited = true;
+                bitedCooldown = 1f;
+                return;
             }
         }
         else
         {
+            if (bited)
+            {
+                bitedCooldown -= Time.deltaTime;
+                rb2D.velocity = Vector2.zero;
+                if (bitedCooldown < 0)
+                    bited = false;
+            }
             if (isWaiting)
             {
                 rb2D.velocity = Vector2.zero;
