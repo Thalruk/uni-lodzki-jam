@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Bonfire : MonoBehaviour
+public class LightMask : MonoBehaviour
 {
     Camera cam;
     [SerializeField] Material material;
@@ -13,7 +13,7 @@ public class Bonfire : MonoBehaviour
     {
         cam = Camera.main;
         mask = cam.GetComponent<Mask>();
-        fire = transform.GetChild(0).gameObject;
+        fire = gameObject;
         fire.GetComponent<Renderer>().material = material;
 
         mask.AddLightObj(fire, material);
@@ -30,5 +30,10 @@ public class Bonfire : MonoBehaviour
         scale += Mathf.Sin(t * 3 + 984) * 0.3f;
 
         fire.transform.localScale = Vector3.Max(baseScale + Vector3.one * scale * 5f, baseScale);
+    }
+
+    private void OnDestroy()
+    {
+        mask.RemoveLightObj(fire);
     }
 }
