@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
 {
-    public static event Action OnHealthChanged, OnDie;
+    public event Action OnHealthChanged, OnDie;
     int health;
     [SerializeField] GameObject grid;
     [SerializeField] Image healthImage;
@@ -41,6 +41,7 @@ public class HealthSystem : MonoBehaviour
 
         }
     }
+
     void UpdateHealth(int value)
     {
         if (grid == null) return;

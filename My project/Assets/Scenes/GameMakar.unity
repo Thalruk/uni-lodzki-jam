@@ -522,6 +522,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c6f5a2c6328d04e9a3ac225271161c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &568710310 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3167784187503013521, guid: 7c2d922a8c0589245b195a65ae57a7b9, type: 3}
+  m_PrefabInstance: {fileID: 1293023144}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &592164591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1778,11 +1783,11 @@ PrefabInstance:
     - target: {fileID: 2333872957306803247, guid: da3f410d0c3674548a910a868c9f0a83, type: 3}
       propertyPath: coneGameObj.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1880542434}
     - target: {fileID: 2333872957306803247, guid: da3f410d0c3674548a910a868c9f0a83, type: 3}
       propertyPath: coneGameObj.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 568710310}
     - target: {fileID: 2333872957306803247, guid: da3f410d0c3674548a910a868c9f0a83, type: 3}
       propertyPath: coneGameObj.Array.data[2]
       value: 
@@ -1870,6 +1875,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1880542434 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4898805446833753107, guid: 7c2d922a8c0589245b195a65ae57a7b9, type: 3}
+  m_PrefabInstance: {fileID: 1293023144}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1941056438 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8649612468400633392, guid: dc732f81558ff9049a775db098cd9df1, type: 3}
