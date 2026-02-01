@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     List<ItemBaseClass> items = new List<ItemBaseClass>();
     private float _baseDashCooldown, _baseSpeed;
     int equippedItemIndex, currentSound, currentFrame;
-    bool VendigoState = false, vendigoLeftHandUsed;
+    bool VendigoState = false, vendigoLeftHandUsed, isDied = false;
     float horizontal;
     float vertical;
     Rigidbody2D rb;
@@ -83,10 +83,12 @@ public class PlayerMovement : MonoBehaviour
     }
     void Die()
     {
+        isDied = true;
         OnPlayerDeath?.Invoke();
     }
     private void Update()
     {
+        if (isDied) return;
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
         movementDirection = new Vector2(horizontal, vertical).normalized;
@@ -261,6 +263,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isDied) return;
         if (isDashing)
         {
             return;
