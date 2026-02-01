@@ -56,5 +56,15 @@ public class Mask : MonoBehaviour
             maskMaterial.Add(mat);
     }
 
+    public void RemoveLightObj(GameObject go)
+    {
+        int index = coneGameObj.IndexOf(go);
+        if (index != -1)
+        {
+            coneGameObj.RemoveAt(index);
+            maskMaterial.RemoveAt(index);
+        }
+    }
+
 
 }
