@@ -24,12 +24,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashTime;
     [SerializeField] float dashCooldown;
     [SerializeField] AudioClip[] stepSounds;
-    [SerializeField] Animation playerAnimation;
+    [SerializeField] Sprite[] playerAnimation;
     [SerializeField] List<Image> uiImagesOfMasks = new List<Image>();
     [SerializeField] List<Image> uiImagesOfMasksBG = new List<Image>();
     List<ItemBaseClass> items = new List<ItemBaseClass>();
     private float _baseDashCooldown, _baseSpeed;
-    int equippedItemIndex, currentSound;
+    int equippedItemIndex, currentSound, currentFrame;
     bool VendigoState = false, vendigoLeftHandUsed;
     float horizontal;
     float vertical;
@@ -95,9 +95,9 @@ public class PlayerMovement : MonoBehaviour
             //playerAnimation.Play();
             if (!playerSounds.isPlaying)
             {
-
-                currentSound++;
-                currentSound = currentSound % stepSounds.Length;
+                currentFrame = (currentFrame+1)%playerAnimation.Length;
+                playerSpriteRenderer.sprite = playerAnimation[currentFrame];
+                currentSound = (currentSound+1) % stepSounds.Length;
                 playerSounds.clip = stepSounds[currentSound];
                 playerSounds.Play();
             }

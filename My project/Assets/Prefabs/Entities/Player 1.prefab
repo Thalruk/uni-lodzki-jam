@@ -75,7 +75,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7803fd358f34da945a0fc388101175a3, type: 3}
   - {fileID: 8300000, guid: b7fc0b7a3a02b6045bf319b1e3abbacf, type: 3}
   - {fileID: 8300000, guid: cb50127d8110c364b8245ac368a0c84b, type: 3}
-  playerAnimation: {fileID: 0}
+  playerAnimation:
+  - {fileID: 0}
   uiImagesOfMasks:
   - {fileID: 0}
   - {fileID: 0}
