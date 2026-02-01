@@ -79,6 +79,7 @@ public class EnemyController : MonoBehaviour, IDamaglable
 
     private void FixedUpdate()
     {
+
         Vector2 targetPos;
 
         if (isChasing && fow.player != null)

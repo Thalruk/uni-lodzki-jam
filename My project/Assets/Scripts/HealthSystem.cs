@@ -22,10 +22,25 @@ public class HealthSystem : MonoBehaviour
 
         }
     }
+    void UpdateHealth(int value)
+    {
+        if(grid==null)return;
+        switch (Mathf.Sign(value))
+        {
+            case 1:
+                Instantiate(healthImage, grid.transform);
+                break;
+            case -1:
+                Destroy(grid.transform.GetChild(0));
+                break;
+        }
+
+    }
     public void ChangeHealth(int value)
     {
         health += value;
         OnHealthChanged?.Invoke();
+        UpdateHealth(value);
         if (health <= 0)
         {
             OnDie?.Invoke();
