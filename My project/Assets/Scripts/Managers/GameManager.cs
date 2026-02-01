@@ -7,14 +7,17 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         PlayerMovement.OnPlayerDeath += OnLose;
+        Beholder.OnBossDie += OnWin;
     }
     private void OnDisable()
     {
         PlayerMovement.OnPlayerDeath -= OnLose;
+        Beholder.OnBossDie -= OnWin;
     }
     private void OnDestroy()
     {
         PlayerMovement.OnPlayerDeath -= OnLose;
+        Beholder.OnBossDie -= OnWin;
     }
     void OnWin()
     {
