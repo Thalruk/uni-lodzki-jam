@@ -65,7 +65,7 @@ public class BeholderLaser : MonoBehaviour
                 {
                     if (hit.collider.TryGetComponent(out HealthSystem health))
                     {
-                        health.ChangeHealth(-1);
+                        health.ChangeHealth(-damage);
                         nextDamageTime = Time.time + damageTickRate;
                     }
                 }

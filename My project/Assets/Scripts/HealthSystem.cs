@@ -19,7 +19,6 @@ public class HealthSystem : MonoBehaviour
     {
         cam = Camera.main;
         cam.GetComponent<PostProcessVolume>().profile.TryGetSettings(out vignette);
-
     }
 
     private void Update()
@@ -27,7 +26,7 @@ public class HealthSystem : MonoBehaviour
         if (!grid)
             return;
         currentIntensity = Mathf.Lerp(currentIntensity, vignetteIntensity, 0.1f);
-        vignette.intensity.value = currentIntensity;
+        //vignette.intensity.value = currentIntensity;
     }
     public void SetStartingHealth(int value)
     {
@@ -38,7 +37,6 @@ public class HealthSystem : MonoBehaviour
             {
                 Instantiate(healthImage, grid.transform);
             }
-
         }
     }
 

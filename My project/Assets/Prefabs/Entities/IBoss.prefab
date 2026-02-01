@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 7652863184698954829}
   - component: {fileID: 7166452808968106520}
   - component: {fileID: 8335586353040774811}
+  - component: {fileID: 610834122684655671}
   m_Layer: 0
   m_Name: IBoss
   m_TagString: Untagged
@@ -196,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   criticalDistance: 25
+  healthSystem: {fileID: 610834122684655671}
   moveSpeed: 0.25
   laserCooldown: 5
   laserPrefab: {fileID: 8988680396420227715, guid: d7ba9bb9a6f18a14f80a9fd7dd134bd3, type: 3}
@@ -222,6 +224,20 @@ MonoBehaviour:
   minRadius: 5
   maxRadius: 20
   randomness: 0.587
+--- !u!114 &610834122684655671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5703598294104901015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0982d7d1a46931488a44127c57f2ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 0}
+  healthImage: {fileID: 0}
 --- !u!1 &6253011799934623793
 GameObject:
   m_ObjectHideFlags: 0

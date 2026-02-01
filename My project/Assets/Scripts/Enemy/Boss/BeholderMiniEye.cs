@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class BeholderMiniEye : MonoBehaviour, IDamaglable
 {
-    [HideInInspector] public EnemyFieldOfView fow;
+    [SerializeField] public EnemyFieldOfView fow;
     [SerializeField] public Vector2 lookDir;
     [SerializeField] float offset = 0.2f;
     [SerializeField] Transform eyeVisual;
     [SerializeField] Sprite openEye;
     [SerializeField] Sprite closedEye;
+    [SerializeField] HealthSystem healthSystem;
 
     [Header("Patrol & Smoothness")]
     [SerializeField] float patrolAngle = 30f;
@@ -29,7 +30,7 @@ public class BeholderMiniEye : MonoBehaviour, IDamaglable
 
     void Awake()
     {
-        fow = GetComponent<EnemyFieldOfView>();
+        fow = GetComponentInChildren<EnemyFieldOfView>();
         randomOffset = Random.Range(0f, 100f);
     }
 
@@ -37,6 +38,7 @@ public class BeholderMiniEye : MonoBehaviour, IDamaglable
     {
         baseAngle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         currentAngle = baseAngle;
+        healthSystem.SetStartingHealth(1);
     }
 
     void Update()
@@ -144,6 +146,7 @@ public class BeholderMiniEye : MonoBehaviour, IDamaglable
 
     public void TakeDamage()
     {
+        print("EYE HIT");
         isDead = true;
         fireTimer = float.MaxValue;
         GetComponent<SpriteRenderer>().sprite = closedEye;

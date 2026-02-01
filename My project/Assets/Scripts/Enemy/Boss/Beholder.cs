@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Beholder : MonoBehaviour
+public class Beholder : MonoBehaviour, IDamaglable
 {
     private List<BeholderMiniEye> allEyes = new List<BeholderMiniEye>();
     [SerializeField] float criticalDistance = 5f;
 
     [Header("Phase 2 Settings")]
+    [SerializeField] HealthSystem healthSystem;
     [SerializeField] float moveSpeed = 2f;
     [SerializeField] float laserCooldown = 5f;
     [SerializeField] GameObject laserPrefab;
@@ -24,12 +25,18 @@ public class Beholder : MonoBehaviour
 
     private float currentMainEyeAngle;
 
+    private void Awake()
+    {
+        healthSystem.SetStartingHealth(5);
+        healthSystem.OnDie += HandleBossDeath;
+    }
+
     public void RegisterEyes(List<BeholderMiniEye> eyes)
     {
         allEyes = eyes;
         foreach (var eye in allEyes)
         {
-            var fow = eye.GetComponent<EnemyFieldOfView>();
+            var fow = eye.GetComponentInChildren<EnemyFieldOfView>();
             fow.OnPlayerSeenChanged += (spotted) => OnEyeStatusChanged(eye, spotted);
         }
     }
@@ -193,5 +200,23 @@ public class Beholder : MonoBehaviour
         {
             if (eye != null) eye.forceLookTarget = null;
         }
+    }
+
+    public void TakeDamage()
+    {
+        if (isPhase2)
+        {
+            healthSystem.ChangeHealth(-1);
+        }
+    }
+    private void HandleBossDeath()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (healthSystem != null)
+            healthSystem.OnDie -= HandleBossDeath;
     }
 }
